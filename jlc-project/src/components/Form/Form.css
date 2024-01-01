@@ -1,0 +1,26 @@
+.image-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.image-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-option img {
+  margin-bottom: 5px;
+}
+
+.radio-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.product-opt{
+  display: flex;
+  gap: 30px;
+}
