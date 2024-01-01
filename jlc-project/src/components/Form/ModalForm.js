@@ -1,16 +1,12 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 
 function ModalForm({
   handleSubmit,
   selectedOption,
-  handlePcbQtyChange,
   inputValue,
-  pcbQty,
   radioNumbers,
   handleInputChange,
   handleOptionChange,
-  generatePcbQtyOptions,
   selectedImage,
   selectedNumber,
   handleNumberChange,
@@ -19,17 +15,34 @@ function ModalForm({
   layers,
   handleProductTypeChange,
   selectedProductType,
-  productType
-}) 
+  productType,
+  pcbQtyVisible,
+  setPcbQtyVisible,
+  handlePcbQtyChange,
+  selectedPcbQty,
+  pcbQty,
+  handlePCBQtyValue,
+  pcbQtyOptions
+})
+
 
 {
+  const [isInitialRender, setIsInitialRender] = useState(true);
+
+  useEffect(() => {
+    if (isInitialRender) {
+      handlePCBQtyValue(5);
+      setIsInitialRender(false);
+    }
+  }, [isInitialRender, handlePCBQtyValue]);
+
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className='content image-options'>
           <h2>Base Material</h2>
           {baseMaterialImages.map((imageName, index) => (
-            <label key={index} className="image-option">
+            <label key={index} className="custom-radio-label">
               <input
                 type="radio"
                 name="baseMaterial"
@@ -40,34 +53,43 @@ function ModalForm({
               <img
                 src={`/images_bm/${imageName}.png`}
                 alt={imageName}
-                style={{ width: '150px', height: '100px' }}
+                className={`custom-radio-image ${selectedImage === imageName ? 'selected' : ''}`}
+                onClick={() => handleImageChange({ target: { value: imageName } })}
               />
-               <div className='image-option'>{`${imageName}`}</div>
+              <div className={`custom-radio-text ${selectedImage === imageName ? 'selected' : ''}`}>
+                {`${imageName}`}
+              </div>
             </label>
           ))}
         </div>
 
         <div className='content'>
-        <h2>Layers</h2>
-        <div className="radio-btn">
+          <h2>Layers</h2>
+          <div className="radio-btn">
             {radioNumbers.map((number, index) => (
-              <label key={index}>
+              <label key={index} className="custom-radio-label">
                 <input
-                   type="radio"
-                   name="layers"
-                   value={number}
-                   checked={selectedNumber === number}
-                   onChange={handleNumberChange}
+                  type="radio"
+                  name="layers"
+                  value={number}
+                  checked={selectedNumber === number}
+                  onChange={handleNumberChange}
+                  style={{ display: 'none' }}
                 />
-                {` ${layers[index]}`}
+                <span
+                  className={`custom-radio-text ${selectedNumber === number ? 'selected' : ''}`}
+                  onClick={() => handleNumberChange({ target: { value: number } })}
+                >
+                  {` ${layers[index]}`}
+                </span>
               </label>
             ))}
           </div>
         </div>
-        
+
         <div className='content'>
-        <h2>Dimensions</h2>
-        <input
+          <h2>Dimensions</h2>
+          <input
             type="text"
             value={inputValue}
             onChange={handleInputChange}
@@ -75,41 +97,54 @@ function ModalForm({
           *
           <input
             type="text"
-            placeholder="Введите что-то"
             value={inputValue}
             onChange={handleInputChange}
           />
           <select value={selectedOption} onChange={handleOptionChange}>
-            <option value="100">100</option>
-            <option value="200">200</option>
+            <option value="mm">mm</option>
+            <option value="inch">inch</option>
           </select>
         </div>
 
 
+        <div className="content">
+      <h2>PCB Qty</h2>
+      <div className="custom-radio-text" onClick={() => setPcbQtyVisible(true)}>
+          <span>{pcbQty}</span>
+      </div>
+      {pcbQtyVisible && (
+        <div className="choicePcbQty h-screen w-screen">
+          <div className="modal border-double">
+            {pcbQtyOptions.map((value, index) => (
+              <button
+                className="custom-radio-text"
+                key={index}
+                onClick={() => handlePCBQtyValue(value)}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
         <div className='content'>
-        <h2>PCB Qty</h2>
-        <select value={pcbQty} onChange={handlePcbQtyChange}>
-            {generatePcbQtyOptions()}
-          </select>
+          <h2>Product Type</h2>
+          <div className='product-opt'>
+            {productType.map((productName, index) => (
+              <label key={index} className="custom-radio-label">
+                <span
+                  className={`custom-radio-text ${selectedProductType === productName ? 'selected' : ''}`}
+                  onClick={() => handleProductTypeChange({ target: { value: productName } })}
+                >
+                  {`${productName}`}
+                </span>
+              </label>
+            ))}
+          </div>
         </div>
-        <div className='content'>
-        <h2>Product Type</h2>
-        <div className='product-opt'>
-        {productType.map((productName, index) => (
-            <label key={index}>
-              <input
-                type="radio"
-                name="productType"
-                value={productName}
-                checked={selectedProductType === productName}
-                onChange={handleProductTypeChange}
-              />
-               <div>{`${productName}`}</div>
-            </label>
-          ))}
-        </div>
-        </div>
-        
+
         <button type="submit">Отправить</button>
       </form>
     </div>
