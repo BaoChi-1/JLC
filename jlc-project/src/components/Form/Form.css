@@ -16,7 +16,8 @@
   flex-wrap: wrap;
   gap: 10px;
 }
-.product-opt{
+
+.product-opt {
   display: flex;
   gap: 30px;
 }
@@ -39,9 +40,11 @@ input[type="radio"] {
   display: inline-block;
 }
 
-.custom-radio-text.selected, .custom-radio-text.selected {
+.custom-radio-text.selected,
+.custom-radio-text.selected {
   background-color: #d3defc;
 }
+
 .custom-radio-image {
   cursor: pointer;
   margin: 5px;
@@ -50,22 +53,25 @@ input[type="radio"] {
   width: 150px;
   height: 100px;
 }
+
 .custom-radio-image.selected {
   border-color: #007bff;
 }
+
 .choicePcbQty {
   position: fixed;
   left: 0;
   top: 0;
   z-index: 99999;
-  background: rgba( 0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: grid;
   overflow-y: auto;
   align-items: center;
   justify-content: center;
   animation: fIn .3s ease-out;
 }
-.modal{
+
+.modal {
   font-family: sans-serif;
   padding: 20px;
   width: 22vi;
@@ -74,19 +80,72 @@ input[type="radio"] {
   border-color: rgba(255, 90, 123, 0.781);
   animation: sIn .3s ease-out;
 }
-@keyframes fIn{
-  from{
-      opacity: 0;
+
+@keyframes fIn {
+  from {
+    opacity: 0;
   }
-  to{
-      opacity: 1;
+
+  to {
+    opacity: 1;
   }
 }
-@keyframes sIn{
-  from{
-      transform: translateY(-100%);
+
+@keyframes sIn {
+  from {
+    transform: translateY(-100%);
   }
-  to{
-      transform: translateY(0);
+
+  to {
+    transform: translateY(0);
   }
+}
+
+.form {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: max-content;
+  border:double rgb(137, 184, 255);
+  margin: 0 auto;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.base-material {
+  display: flex;
+  flex-direction: row;
+}
+.dimen-opt input, .dimen-opt select{
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin: 5px;
+}
+
+.order{
+  position: fixed;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin: 3vi;
+  padding: 10px;
+  top: 0;
+  right: 0;
+  width: max-content;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.fonts{
+  font-size: 1.3vi;
+}
+.sub{
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #55a7ff;
+  padding: 5px 10px;
 }

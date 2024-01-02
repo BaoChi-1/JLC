@@ -1,10 +1,10 @@
 import React from 'react';
-import WindowForm from './components/Form/WindowForm';
+import TotalForm from './components/Form/TotalForm';
 
 function App() {
   return (
     <div className="App">
-      <WindowForm />
+      <TotalForm />
     </div>
   );
 }

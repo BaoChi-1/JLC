@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import ModalForm from './ModalForm';
 import "./Form.css"
+import SideForm from "./SideForm/SideForm";
 
 
-function WindowForm() {
+function TotalForm() {
   const [pcbQty, setPcbQty] = useState(5);
   const [selectedOption, setSelectedOption] = useState("mm");
   const [selectedProductType, setSelectedProductType] = useState("")
@@ -15,6 +16,7 @@ function WindowForm() {
   const [specificationsVisible, setSpecificationsVisible] = useState(false);
   const [highOptVisible, setHighOptVisible] = useState(false);
   const [advanceOptVisible, setAdvanceOptVisible] = useState(false);
+  const [sideFormVisible, setSideFormVisible] = useState(false);
   const [pcbQtyVisible, setPcbQtyVisible] = useState(false);
 
   const baseMaterialImages = [
@@ -125,8 +127,9 @@ function WindowForm() {
         selectedPcbQty={selectedPcbQty}
         setSelectedPcbQty={setSelectedPcbQty}
       />
+      <SideForm />
     </div>
   );
 }
 
-export default WindowForm;
+export default TotalForm;

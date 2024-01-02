@@ -41,6 +41,7 @@ function ModalForm({
       <form onSubmit={handleSubmit}>
         <div className='content image-options'>
           <h2>Base Material</h2>
+          <div className='base-material'>
           {baseMaterialImages.map((imageName, index) => (
             <label key={index} className="custom-radio-label">
               <input
@@ -61,6 +62,7 @@ function ModalForm({
               </div>
             </label>
           ))}
+          </div>
         </div>
 
         <div className='content'>
@@ -87,7 +89,7 @@ function ModalForm({
           </div>
         </div>
 
-        <div className='content'>
+        <div className='dimen-opt'>
           <h2>Dimensions</h2>
           <input
             type="text"
@@ -107,7 +109,7 @@ function ModalForm({
         </div>
 
 
-        <div className="content">
+        <div>
       <h2>PCB Qty</h2>
       <div className="custom-radio-text" onClick={() => setPcbQtyVisible(true)}>
           <span>{pcbQty}</span>
@@ -144,8 +146,6 @@ function ModalForm({
             ))}
           </div>
         </div>
-
-        <button type="submit">Отправить</button>
       </form>
     </div>
   );
