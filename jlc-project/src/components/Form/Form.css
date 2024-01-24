@@ -106,7 +106,8 @@ input[type="radio"] {
   justify-content: center;
   padding: 30px;
   border-radius: 10px;
-  max-width: max-content;
+  flex-wrap: wrap;
+  max-width: 65%;
   border:double rgb(137, 184, 255);
   margin: 0 auto;
 }
@@ -191,4 +192,12 @@ input[type="radio"] {
 .custom-radio-text.disabled {
   color: #999;
   pointer-events: none;
+}
+.panel input{
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-right: .5vi;
+  margin-top: .5vi;
 }

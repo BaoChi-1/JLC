@@ -3,11 +3,11 @@ import ColorItem from './ColorItem';
 import FormVisibility from './FormVisibility';
 import Item from './Item';
 function Specifications({
-  deliveryOpt,
+  currentDelivery,
   selectedDelivery,
-  thickness,
-  color,
-  surface,
+  panelFormat,
+  currentColor,
+  currentSurface,
   handleColorChange,
   handleSurfaceChange,
   selectedColor,
@@ -18,12 +18,35 @@ function Specifications({
   selectedDesign,
   inputValueDesign,
   handleInputDesignChange,
-  design,
+  currentDesign,
   handleSilkscreenChange,
   selectedSilkscreen,
   handleDeliveryChange,
   specificationsVisible,
-  toggleSpecificationsVisibility
+  toggleSpecificationsVisibility,
+  currentThickness,
+  inputVisible,
+  handleInputColumnChange,
+  handleInputRowChange,
+  inputValuesColumn,
+  inputValuesRow,
+  selectedEdgeRail,
+  handleEdgesRailsChange,
+  edgeRails,
+  edgeRailVisible,
+  currentColorSilkScreen,
+  goldThicknessVisible,
+  handleGoldThicknessChange,
+  currentGoldThickness,
+  selectedGoldThickness,
+  materialTypeVisible,
+  selectedMaterialType,
+currentMaterialType,
+handleMaterialTypeChange,
+cooperTypeVisible,
+selectedCooperType,
+currentCooperType,
+handleCooperTypeChange
 }) {
   return (
     <div className="specifications">
@@ -37,59 +60,112 @@ function Specifications({
             <h2>Different Design</h2>
             <div className="flex items-center">
               <div className="radio-btn">
-                {design.map((value, index) => (
+                {currentDesign.map((value, index) => (
                   <label key={index} className="custom-radio-label">
                     <span
                       className={`custom-radio-text ${selectedDesign === value ? 'selected' : ''}`}
                       onClick={() => handleDesignChange({ target: { value } })}
                     >
-                      {` ${design[index]}`}
+                      {` ${currentDesign[index]}`}
                     </span>
                   </label>
                 ))}
               </div>
-              <div className='dimen-input'>
-                <input
-                  type="text"
-                  value={inputValueDesign}
-                  onChange={handleInputDesignChange}
-                />
-              </div>
+              {inputVisible && (
+                <div className='dimen-input'>
+                  <input
+                    type="text"
+                    value={inputValueDesign}
+                    onChange={handleInputDesignChange}
+                  />
+                </div>
+              )}
+
 
             </div>
 
           </div>
           <Item
-          title="Delivery Format"
-          options={deliveryOpt}
-          selectedValue={selectedDelivery}
-          handleChange={handleDeliveryChange}
-        />
-         <Item
-          title="PCB Thickness"
-          options={thickness}
-          selectedValue={selectedThickness}
-          handleChange={handleThicknessChange}
-        />
-        
-          <ColorItem 
-          title="PCB Color"
-          options={color}
-          selectedValue={selectedColor}
-          handleChange={handleColorChange}
+            title="Delivery Format"
+            options={currentDelivery}
+            selectedValue={selectedDelivery}
+            handleChange={handleDeliveryChange}
           />
-          <ColorItem 
-          title="Silkscreen"
-          options={['White', 'Black']}
-          selectedValue={selectedSilkscreen}
-          handleChange={handleSilkscreenChange}
-          />        
+          {panelFormat && (
+            <div className='panel'>
+              <h2>Panel Format</h2>
+              <input
+                type="text"
+                value={inputValuesRow}
+                onChange={handleInputRowChange}
+              />
+              *
+              <input
+                type="text"
+                value={inputValuesColumn}
+                onChange={handleInputColumnChange}
+              />
+            </div>
+          )}
+          {edgeRailVisible && (
+            <Item
+              title="Edge Rails"
+              options={edgeRails}
+              selectedValue={selectedEdgeRail}
+              handleChange={handleEdgesRailsChange}
+            />
+          )}
           <Item
-          title="Surface Finish"
-          options={surface}
-          selectedValue={selectedSurface}
-          handleChange={handleSurfaceChange}
-        />
+            title="PCB Thickness"
+            options={currentThickness}
+            selectedValue={selectedThickness}
+            handleChange={handleThicknessChange}
+          />
+
+          <ColorItem
+            title="PCB Color"
+            options={currentColor}
+            selectedValue={selectedColor}
+            handleChange={handleColorChange}
+          />
+          <ColorItem
+            title="Silkscreen"
+            options={currentColorSilkScreen}
+            selectedValue={selectedSilkscreen}
+            handleChange={handleSilkscreenChange}
+          />
+          {cooperTypeVisible&&(
+              <Item
+            title="Cooper Type"
+            options={currentCooperType}
+            selectedValue={selectedCooperType}
+            handleChange={handleCooperTypeChange}
+          />
+          )}
+          {materialTypeVisible && (
+            <Item
+            title="Material Type"
+            options={currentMaterialType}
+            selectedValue={selectedMaterialType}
+            handleChange={handleMaterialTypeChange}
+          />
+          )}
+          <Item
+            title="Surface Finish"
+            options={currentSurface}
+            selectedValue={selectedSurface}
+            handleChange={handleSurfaceChange}
+          />
+          {goldThicknessVisible && (
+              <Item
+                title="Gold Thickness"
+                options={currentGoldThickness}
+                selectedValue={selectedGoldThickness}
+                handleChange={handleGoldThicknessChange}
+              />
+          )}
+
+
         </div>
       )}
 

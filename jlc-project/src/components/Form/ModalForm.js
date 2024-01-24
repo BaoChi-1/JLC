@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Item from './Item';
 function ModalForm({
   selectedOption,
-  radioNumbers,
+  currentNumbers,
   inputValuesHeight,
   inputValuesWidth,
   handleOptionChange,
@@ -52,9 +52,10 @@ function ModalForm({
             ))}
           </div>
         </div>
+        
         <Item
         title="Layers"
-        options={radioNumbers}
+        options={currentNumbers}
         selectedValue={selectedNumber}
         handleChange={handleNumberChange}
       />
