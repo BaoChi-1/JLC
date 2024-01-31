@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import ChargeDetail from './ChargeDetail';
 
-function SideForm() {
+function SideForm({
+  saveJsonToFile
+}) {
   
   const [chargeDetailVisible,setChargeDetailVisible]=useState(false);
+
   const handleChargeDetailVisible=()=>{
     setChargeDetailVisible((prevVisible) => !prevVisible);
   }
+
+    
   return (
     <div className="order">
       <ChargeDetail
@@ -24,7 +29,7 @@ function SideForm() {
         <h2 className='fonts'>Calculated Price</h2>
         <span></span>
         </div>
-        <button className="sub" type="submit">ADD TO CART</button>
+        <button className="sub" type="submit" onClick={saveJsonToFile}>ADD TO CART</button>
         </div>
     </div>
   );

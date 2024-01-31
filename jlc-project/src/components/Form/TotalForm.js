@@ -85,33 +85,33 @@ function TotalForm() {
     selectedNumber: 2,
     selectedDelivery: 'Single PCB',
     selectedImage: 'FR-4',
-selectedPcbQty: null,
-selectedCooperType: "Electro-deposite",
-selectedDesign: 1,
-selectedColor: "Green",
-selectedSurface: "HASL(with lead)",
-selectedThickness: 1.6,
-selectedGoldThickness: '1 U"',
-selectedCoverlayThickness: 'PI:12.5um/AD:15um',
-selectedOz: "1 oz",
-selectedViaCovering: "Tented",
-selectedBoardOutlineTolerance: "±0.2 mm (Regular)",
-selectedFlyingProbeTest: "Fully Test",
-selectedLayerStackup: "No requirement",
-selectedMinVia: "0.3mm/(0.4/0.45mm)",
-selectedOz2: "0.5 oz",
-selectedEdgeRail: "No",
-selectedSilkscreen: 'White',
-selectedAppearanceQuality: "IPC Class 2 Standart",
-selectedSilkscreenTechnology: "Ink-jet/Screen Printing Silkscreen",
-selectedPackage: "With JLCPCB logo",
-selectedMaterialType: "FR4-Standard TG 135-140",
-selectedStiffener: "Without",
-selectedEmi: "Without",
-selectedCuttingMethod: "Laser Cutting",
+    selectedPcbQty: null,
+    selectedCooperType: "Electro-deposite",
+    selectedDesign: 1,
+    selectedColor: "Green",
+    selectedSurface: "HASL(with lead)",
+    selectedThickness: 1.6,
+    selectedGoldThickness: '1 U"',
+    selectedCoverlayThickness: 'PI:12.5um/AD:15um',
+    selectedOz: "1 oz",
+    selectedViaCovering: "Tented",
+    selectedBoardOutlineTolerance: "±0.2 mm (Regular)",
+    selectedFlyingProbeTest: "Fully Test",
+    selectedLayerStackup: "No requirement",
+    selectedMinVia: "0.3mm/(0.4/0.45mm)",
+    selectedOz2: "0.5 oz",
+    selectedEdgeRail: "No",
+    selectedSilkscreen: 'White',
+    selectedAppearanceQuality: "IPC Class 2 Standart",
+    selectedSilkscreenTechnology: "Ink-jet/Screen Printing Silkscreen",
+    selectedPackage: "With JLCPCB logo",
+    selectedMaterialType: "FR4-Standard TG 135-140",
+    selectedStiffener: "Without",
+    selectedEmi: "Without",
+    selectedCuttingMethod: "Laser Cutting",
   });
   const [selectedEdges, setSelectedEdges] = useState();
- 
+
   const [currentMaterialType, setCurrentMaterialType] = useState(materialType);
   const [currentEdgePlating, setCurrentEdgePlating] = useState(optionsYesNo);
   const [currentCastellatedHoles, setCurrentCastellatedHoles] = useState(optionsYesNo);
@@ -129,7 +129,7 @@ selectedCuttingMethod: "Laser Cutting",
   const [currentColorSilkScreen, setCurrentColorSilkScreen] = useState(silkscreen);
   const [currentColorOz, setCurrentOz] = useState(oz);
   const [currentFlyingProbeTest, setCurrentFlyingProbeTest] = useState(flyingProbeTest);
-const [currentSurface, setCurrentSurface] = useState(surface);
+  const [currentSurface, setCurrentSurface] = useState(surface);
   const [currentNumbers, setCurrentNumbers] = useState(layers);
   const [currentAppearanceQuality, setCurrentAppearanceQuality] = useState(appearanceQuality);
   const [highOptVisible, setHighOptVisible] = useState(false);
@@ -148,12 +148,118 @@ const [currentSurface, setCurrentSurface] = useState(surface);
   const [addOptFlexVisible, setAddOptFlexVisible] = useState(false);
   const [addOptFRVisible, setAddOptFRVisible] = useState(false);
   const [goldThicknessVisible, setGoldThicknessVisible] = useState(false);
-  const jsonData = JSON.stringify(selectedData, null, 28);
 
   useEffect(() => {
-    localStorage.setItem('selectedData', jsonData);
-    const savedData = localStorage.getItem('selectedData');
-    console.log(JSON.parse(savedData));
+
+    // const serverData = {
+    //   "produceOrderAccessId": "",
+    //   "achieveHours": 48,
+    //   "adornColor": "绿",
+    //   "adornPut": "有铅喷锡",
+    //   "adornBestrow": "过孔盖油",
+    //   "cascadeStructure": null,
+    //   "impedanceLaminatedConstructionDto": null,
+    //   "halfHole": false,
+    //   "madeSmt": false,
+    //   "impedance": false,
+    //   "confirmProductionFile": "",
+    //   "confirmProductionFileType": null,
+    //   "cuprumThickness": 1,
+    //   "insideCuprumThickness": 0.5,
+    //   "halfHoleNumber": 0,
+    //   "isNeedBook": "no",
+    //   "isNewOrder": "yes",
+    //   "specifyBoard": false,
+    //   "specifyBoardName": "无要求",
+    //   "specifyBoardCode": "无要求",
+    //   "invoiceType": 99,
+    //   "orderType": 1,
+    //   "printHDChar": false,
+    //   "stencilCounts": 5,
+    //   "stencilLayer": "2",
+    //   "stencilLength": 11,
+    //   "stencilNumber": 1,
+    //   "stencilPly": "1.6",
+    //   "stencilWidth": 11,
+    //   "sestencilCountX": null,
+    //   "sestencilCountY": null,
+    //   "testProduct": 2,
+    //   "addOrderSource": 4,
+    //   "collarCouponNo": "",
+    //   "deviceId": null,
+    //   "pcHelperDeviceInfoType": null,
+    //   "receivePhone": "",
+    //   "isBackOrder": "no",
+    //   "isStencilType": "no",
+    //   "historyStencilType": null,
+    //   "historyStencilCounts": 5,
+    //   "historyStencilLength": "11",
+    //   "historyStencilWidth": "11",
+    //   "edgeGrinding": false,
+    //   "lowResistanceTest": false,
+    //   "isMakeup": null,
+    //   "tgBoardLevel": "TG135",
+    //   "guaranteeService": false,
+    //   "guaranteeCount": null,
+    //   "guaranteeUnitPrice": null,
+    //   "timeStamp": "0.6595454801328777",
+    //   "rimCutMoney": null,
+    //   "uploadFileAfterProcess": true,
+    //   "plateType": 1,
+    //   "serviceMoneyId": [
+    //     806200,
+    //     806206,
+    //     806213,
+    //     806218,
+    //     806225,
+    //     806239,
+    //     806247,
+    //     806251,
+    //     806259,
+    //     806121,
+    //     806086,
+    //     806092,
+    //     806210,
+    //     806263
+    //   ],
+    //   "filePreverifyUUID": null,
+    //   "collarCouponVo": null,
+    //   "printMethod": "",
+    //   "intialMadeSmtFlag": false,
+    //   "madeSteel": false
+    // }
+
+    // setSelectedData({
+    //   selectedColor: serverData.adornColor, 
+    // selectedProductType: serverData.,
+    // selectedNumber: serverData.stencilLayer,
+    // selectedDelivery: serverData.,
+    // selectedImage: serverData.,
+    // selectedPcbQty: serverData.,
+    // selectedCooperType: serverData.,
+    // selectedDesign: serverData.,
+    // selectedSurface: serverData.,
+    // selectedThickness: serverData.,
+    // selectedGoldThickness: serverData.,
+    // selectedCoverlayThickness: serverData.,
+    // selectedOz: serverData.,
+    // selectedViaCovering: serverData.,
+    // selectedBoardOutlineTolerance: serverData.,
+    // selectedFlyingProbeTest: serverData.,
+    // selectedLayerStackup: serverData.,
+    // selectedMinVia: serverData.,
+    // selectedOz2: serverData.,
+    // selectedEdgeRail: serverData.,
+    // selectedSilkscreen: serverData.,
+    // selectedAppearanceQuality: serverData.,
+    // selectedSilkscreenTechnology: serverData.,
+    // selectedPackage: serverData.,
+    // selectedMaterialType: serverData.,
+    // selectedStiffener: serverData.,
+    // selectedEmi: serverData.,
+    // selectedCuttingMethod: serverData.,
+    // });
+    
     if (pcbQty < 50) {
       setCurrentAppearanceQuality(appearanceQuality.slice(0, 1));
       setCurrentFlyingProbeTest(flyingProbeTest.slice(0, 1));
@@ -165,7 +271,7 @@ const [currentSurface, setCurrentSurface] = useState(surface);
         ...prevData,
         selectedFlyingProbeTest: "Random Test",
       }));
-        }
+    }
     if (selectedData.selectedSurface === 'ENIG') {
       setGoldThicknessVisible(true);
     } else {
@@ -297,8 +403,8 @@ const [currentSurface, setCurrentSurface] = useState(surface);
         }
 
       }
-      else if (selectedData.selectedNumber === 6 || selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10 
-        || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16 
+      else if (selectedData.selectedNumber === 6 || selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10
+        || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16
         || selectedData.selectedNumber === 18 || selectedData.selectedNumber === 20) {
         setMaterialTypeVisible(true);
         setAddOptVisible(true);
@@ -336,8 +442,8 @@ const [currentSurface, setCurrentSurface] = useState(surface);
             setCurrentMaterialType(materialType.slice(0, 2));
           }
 
-        } else if (selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12 
-          || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16 || selectedData.selectedNumber === 18 
+        } else if (selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12
+          || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16 || selectedData.selectedNumber === 18
           || selectedData.selectedNumber === 20) {
           const updated = color.filter(item => item !== 'White');
           setCurrentColor(updated);
@@ -348,7 +454,7 @@ const [currentSurface, setCurrentSurface] = useState(surface);
           }));
           setCurrentOz(oz.slice(0, 1));
           setCurrentOz2(oz2.slice(0, 2));
-          if (selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14 
+          if (selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14
             || selectedData.selectedNumber === 16 || selectedData.selectedNumber === 18 || selectedData.selectedNumber === 20) {
             setCurrentThickness(thickness.slice(3));
             setCurrentMaterialType(materialType.slice(2));
@@ -453,16 +559,16 @@ const [currentSurface, setCurrentSurface] = useState(surface);
           ...prevData,
           selectedOz: "1 oz",
         }));
-setSelectedData((prevData) => ({
+        setSelectedData((prevData) => ({
           ...prevData,
           selectedCoverlayThickness: "PI:25um/AD:25um",
         }));
       }
     }
-  }, [selectedData.selectedImage, selectedData.selectedNumber, selectedData.selectedDesign, selectedData.selectedDelivery, 
-    selectedData.selectedColor, edgeAndCastellatedState.castellatedHoles, edgeAndCastellatedState.goldFingers, pcbQty, 
-    selectedData.selectedSurface, selectedData.selectedProductType, edgeAndCastellatedState.control, selectedData.selectedMinVia, 
-    selectedData.selectedThickness], jsonData);
+  }, [selectedData.selectedImage, selectedData.selectedNumber, selectedData.selectedDesign, selectedData.selectedDelivery,
+  selectedData.selectedColor, edgeAndCastellatedState.castellatedHoles, edgeAndCastellatedState.goldFingers, pcbQty,
+  selectedData.selectedSurface, selectedData.selectedProductType, edgeAndCastellatedState.control, selectedData.selectedMinVia,
+  selectedData.selectedThickness]);
 
 
   const handleMinViaChange = (e) => {
@@ -705,6 +811,23 @@ setSelectedData((prevData) => ({
       selectedNumber: parseInt(e.target.value, 10),
     }));
   };
+  const saveJsonToFile = () => {
+  const jsonData1 = JSON.stringify(selectedData, null, 27);
+  const jsonData2 = JSON.stringify(edgeAndCastellatedState, null, 10);
+  const jsonData3 = JSON.stringify(inputValues, null, 5);
+
+  const blob = new Blob([jsonData1, jsonData2, jsonData3 ], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+
+  const clickEvent = new MouseEvent('click');
+  a.dispatchEvent(clickEvent);
+
+  URL.revokeObjectURL(url);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -853,7 +976,7 @@ setSelectedData((prevData) => ({
           fingerChamferedVisible={fingerChamferedVisible}
           handleFingerChamferedChange={handleFingerChamferedChange}
           stiffener={stiffener}
-emi={emi}
+          emi={emi}
         />
         <AdvancesOptions
           toggleAdvancesOptVisibility={toggleAdvancesOptVisibility}
@@ -874,7 +997,8 @@ emi={emi}
           currentSilkscreenTechnology={currentSilkscreenTechnology}
           packageBox={packageBox}
         />
-        <SideForm />
+        <SideForm
+        saveJsonToFile={saveJsonToFile} />
       </form>
 
     </div>
@@ -882,3 +1006,4 @@ emi={emi}
 }
 
 export default TotalForm;
+
