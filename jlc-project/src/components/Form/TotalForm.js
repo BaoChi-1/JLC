@@ -812,20 +812,16 @@ function TotalForm() {
     }));
   };
   const saveJsonToFile = () => {
-  const jsonData1 = JSON.stringify(selectedData, null, 27);
-  const jsonData2 = JSON.stringify(edgeAndCastellatedState, null, 10);
-  const jsonData3 = JSON.stringify(inputValues, null, 5);
-
-  const blob = new Blob([jsonData1, jsonData2, jsonData3 ], { type: 'application/json' });
+  const combinedData = { ...edgeAndCastellatedState, ...inputValues };
+  const finalData = { ...selectedData, ...combinedData };
+  const jsonData = JSON.stringify(finalData, null, 2);
+  const blob = new Blob([jsonData], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
-
   const a = document.createElement('a');
   a.href = url;
   a.download = 'data.json';
-
   const clickEvent = new MouseEvent('click');
   a.dispatchEvent(clickEvent);
-
   URL.revokeObjectURL(url);
   };
   const handleSubmit = (e) => {
