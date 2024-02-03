@@ -101,12 +101,12 @@ function ModalForm({
             </div>
           )}
         </div>
-        <Item
+        {/* <Item
         title="Product Type"
         options={productType}
         selectedValue={selectedProductType}
         handleChange={handleProductTypeChange}
-      />
+      /> */}
         
     </div>
   );

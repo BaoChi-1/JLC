@@ -28,7 +28,7 @@ function TotalForm() {
   const materialType = ['FR4-Standard TG 135-140', 'FR-4 TG155', 'FR-4 TG170'];
   const edgeRails = ['No', 'On 2 Sides', 'On 4 Sides'];
   const oz = ['1 oz', '2 oz'];
-  const productType = ['Industrial/Consumer electronics', 'Aerospace', 'Medical'];
+  // const productType = ['Industrial/Consumer electronics', 'Aerospace', 'Medical'];
   const deliveryOpt = ['Single PCB', 'Panel By Customer', 'Panel By JLCPCB'];
   const oz2 = ['0.5 oz', '1 oz', '2 oz'];
   const minVia = ['0.3mm/(0.4/0.45mm)', '0.25mm/(0.35/0.4mm)', '0.2mm/(0.3/0.35mm)', '0.15mm/(0.25/0.3mm)'];
@@ -62,8 +62,8 @@ function TotalForm() {
   const [edgeAndCastellatedState, setEdgeAndCastellatedState] = useState({
     edgePlating: "No",
     castellatedHoles: "No",
-    confirmFile: "No",
-    removeOrderNumber: "No",
+    confirmFile: "Yes",
+    removeOrderNumber: "Yes",
     goldFingers: "No",
     kelvinTest: "No",
     paper: "No",
@@ -81,7 +81,7 @@ function TotalForm() {
   const [pcbQty, setPcbQty] = useState(5);
   const [selectedOption, setSelectedOption] = useState("mm");
   const [selectedData, setSelectedData] = useState({
-    selectedProductType: 'Industrial/Consumer electronics',
+    // selectedProductType: 'Industrial/Consumer electronics',
     selectedNumber: 2,
     selectedDelivery: 'Single PCB',
     selectedImage: 'FR-4',
@@ -109,8 +109,8 @@ function TotalForm() {
     selectedStiffener: "Without",
     selectedEmi: "Without",
     selectedCuttingMethod: "Laser Cutting",
+    selectedEdges: null,
   });
-  const [selectedEdges, setSelectedEdges] = useState();
 
   const [currentMaterialType, setCurrentMaterialType] = useState(materialType);
   const [currentEdgePlating, setCurrentEdgePlating] = useState(optionsYesNo);
@@ -325,6 +325,9 @@ function TotalForm() {
           selectedSurface: "ENIG",
         }));
         setFingerChamferedVisible(true);
+        if(selectedData.selectedSurface!=="ENIG"){
+          alert('Please, select Gold Fingers with the value "No"')
+        }
       }
       else {
         setCurrentSurface(surface);
@@ -426,6 +429,7 @@ function TotalForm() {
           ...prevData,
           selectedViaCovering: 'Epoxy Filled & Capped',
         }));
+       
         if (selectedData.selectedNumber === 6) {
           setCurrentMaterialType(materialType.slice(0, 2));
           setCurrentOz(oz);
@@ -488,6 +492,7 @@ function TotalForm() {
         setCurrentCastellatedHoles(optionsYesNo);
         setCurrentThickness(thickness);
         setCurrentOz(oz);
+          setCurrentGoldThickness(goldThickness)
         setSelectedData((prevData) => ({
           ...prevData,
           selectedFlyingProbeTest: "Fully Test",
@@ -625,6 +630,7 @@ function TotalForm() {
       selectedAppearanceQuality: e.target.value,
     }));
   };
+  
   const handleSilkscreenTechnologyChange = (e) => {
     setSelectedData((prevData) => ({
       ...prevData,
@@ -859,7 +865,7 @@ function TotalForm() {
           handleNumberChange={handleNumberChange}
           selectedNumber={selectedData.selectedNumber}
           pcbQtyOptions={pcbQtyOptions}
-          productType={productType}
+          // productType={productType}
           selectedProductType={selectedData.selectedProductType}
           handleProductTypeChange={handleProductTypeChange}
           pcbQtyVisible={pcbQtyVisible}
@@ -966,7 +972,7 @@ function TotalForm() {
           currentFlyingProbeTest={currentFlyingProbeTest}
           edgesVisible={edgesVisible}
           handleEdgesChange={handleEdgesChange}
-          selectedEdges={selectedEdges}
+          selectedEdges={selectedData.selectedEdges}
           design={design}
           currentCastellatedHoles={currentCastellatedHoles}
           fingerChamferedVisible={fingerChamferedVisible}
