@@ -3,14 +3,14 @@ import Item from './Item';
 function ModalForm({
   selectedOption,
   currentNumbers,
-  inputValuesHeight,
-  inputValuesWidth,
+  inputValuesstencilLength,
+  inputValuesstencilWidth,
   handleOptionChange,
-  selectedImage,
-  selectedNumber,
+  plateType,
+  stencilLayer,
   handleNumberChange,
-  handleInputWidthChange,
-  handleInputHeightChange,
+  handleInputstencilWidthChange,
+  handleInputstencilLengthChange,
   baseMaterialImages,
   handleImageChange,
   handleProductTypeChange,
@@ -18,9 +18,9 @@ function ModalForm({
   productType,
   pcbQtyVisible,
   setPcbQtyVisible,
-  pcbQty,
+  stencilCounts,
   handlePCBQtyValue,
-  pcbQtyOptions
+  stencilCountsOptions
 }) {
   const [isInitialRender, setIsInitialRender] = useState(true);
 
@@ -37,16 +37,16 @@ function ModalForm({
         <div className='content image-options'>
           <h2>Base Material</h2>
           <div className='base-material'>
-            {baseMaterialImages.map((imageName, index) => (
+            {Object.entries(baseMaterialImages).map(([key, value], index) => (
               <label key={index} className="custom-radio-label">
                 <img
-                  src={`/images_bm/${imageName}.png`}
-                  alt={imageName}
-                  className={`custom-radio-image ${selectedImage === imageName ? 'selected' : ''}`}
-                  onClick={() => handleImageChange({ target: { value: imageName } })}
+                  src={`/images_bm/${key}.png`}
+                  alt={key}
+                  className={`custom-radio-image ${plateType === key ? 'selected' : ''}`}
+                  onClick={() => handleImageChange({ target: { value: key } })}
                 />
-                <div className={`custom-radio-text ${selectedImage === imageName ? 'selected' : ''}`}>
-                  {`${imageName}`}
+                <div className={`custom-radio-text ${plateType === key ? 'selected' : ''}`}>
+                  {`${key}`}
                 </div>
               </label>
             ))}
@@ -56,7 +56,7 @@ function ModalForm({
         <Item
         title="Layers"
         options={currentNumbers}
-        selectedValue={selectedNumber}
+        selectedValue={stencilLayer}
         handleChange={handleNumberChange}
       />
 
@@ -64,14 +64,14 @@ function ModalForm({
           <h2>Dimensions</h2>
           <input
             type="text"
-            value={inputValuesWidth}
-            onChange={handleInputWidthChange}
+            value={inputValuesstencilWidth}
+            onChange={handleInputstencilWidthChange}
           />
           *
           <input
             type="text"
-            value={inputValuesHeight}
-            onChange={handleInputHeightChange}
+            value={inputValuesstencilLength}
+            onChange={handleInputstencilLengthChange}
           />
           <select value={selectedOption} onChange={handleOptionChange}>
             <option value="mm">mm</option>
@@ -83,12 +83,12 @@ function ModalForm({
         <div>
           <h2>PCB Qty</h2>
           <div className="custom-radio-text" onClick={() => setPcbQtyVisible(true)}>
-            <span>{pcbQty}</span>
+            <span>{stencilCounts}</span>
           </div>
           {pcbQtyVisible && (
             <div className="choicePcbQty h-screen w-screen">
               <div className="modal border-double">
-                {pcbQtyOptions.map((value, index) => (
+                {stencilCountsOptions.map((value, index) => (
                   <button
                     className="custom-radio-text"
                     key={index}

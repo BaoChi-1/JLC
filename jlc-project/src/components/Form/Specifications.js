@@ -7,13 +7,14 @@ function Specifications({
   selectedDelivery,
   panelFormat,
   currentColor,
+  handleEnterKeyPress,
   currentSurface,
   handleColorChange,
   handleSurfaceChange,
-  selectedColor,
+  adornColor,
   selectedSurface,
   handleThicknessChange,
-  selectedThickness,
+  stencilPly,
   handleDesignChange,
   selectedDesign,
   inputValueDesign,
@@ -77,6 +78,13 @@ handleCooperTypeChange
                     type="text"
                     value={inputValueDesign}
                     onChange={handleInputDesignChange}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleEnterKeyPress();
+                      }
+                    }}
+                    
                   />
                 </div>
               )}
@@ -118,14 +126,14 @@ handleCooperTypeChange
           <Item
             title="PCB Thickness"
             options={currentThickness}
-            selectedValue={selectedThickness}
+            selectedValue={stencilPly}
             handleChange={handleThicknessChange}
           />
 
           <ColorItem
             title="PCB Color"
             options={currentColor}
-            selectedValue={selectedColor}
+            selectedValue={adornColor}
             handleChange={handleColorChange}
           />
           <ColorItem

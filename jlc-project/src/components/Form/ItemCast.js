@@ -6,7 +6,7 @@ function Item({
     title
   }) {
     const handleOptionClick = (value) => {
-      handleChange({ target: { value } });
+      handleChange(value);
       console.log(`Selected ${title}: ${value}`);
     };
     return (

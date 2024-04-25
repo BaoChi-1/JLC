@@ -18,7 +18,10 @@ function AdvancesOptions({
   currentAppearanceQuality,
   currentSilkscreenTechnology,
   packageBox,
-  currentKelvinTest
+  currentKelvinTest,
+  achieveHours,
+handleAchieveHoursChange,
+hours
 }) {
 
   return (
@@ -40,7 +43,7 @@ function AdvancesOptions({
             options={optionsYesNo}
             selectedValue={selectedPaper}
             handleChange={handlePaperChange}
-          />
+          />          
           <Item
             title="Appearance Quality"
             options={currentAppearanceQuality}
@@ -48,16 +51,23 @@ function AdvancesOptions({
             handleChange={handleAppearanceQualityChange}
           />
           <Item
+            title="Select delivery date"
+            options={hours}
+            selectedValue={achieveHours}
+            handleChange={handleAchieveHoursChange}
+          />
+          {/* <Item
             title="Silkscreen Technology"
             options={currentSilkscreenTechnology}
             selectedValue={selectedSilkscreenTechnology}
             handleChange={handleSilkscreenTechnologyChange}
-          /><Item
+          /> */}
+          {/* <Item
             title="Package Box"
             options={packageBox}
             selectedValue={selectedPackage}
             handleChange={handlePackageChange}
-          />
+          /> */}
         </div>
       )}
 

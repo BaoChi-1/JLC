@@ -8,37 +8,110 @@ import AdvancesOptions from './AdvancesOptions';
 
 
 function TotalForm() {
-  const optionsYesNo = ['No', 'Yes'];
-  const baseMaterialImages = [
-    'FR-4', 'Flex', 'Aluminum',
-    'Copper Core', 'Rogers', 'PTFE Teflon',
-  ];
-  const stiffener = ['Without', 'Polyimide', 'FR4', 'Stainless Steel', '3M Tape'];
-  const emi = ['Without', 'Both sides ( Black ,18um )', 'Single side ( Black ,18um )'];
-  const cuttingMethod = ['Laser Cutting', 'Punching'];
-  const polyimideThickness = ['0.1mm', '0.15mm', '0.20mm', '0.225mm', '0.25mm'];
-
-  const layers = [
-    1, 2, 4, 6, 8, 10,
-    12, 14, 16, 18, 20
-  ];
+  const optionsYesNo = {
+    'No': false,
+    'Yes': true
+  };
+  const castellatedHoles = {
+    'No': [false, 0],
+    '1 side': [true, 1],
+    '2 side': [true, 2],
+    '3 side': [true, 3],
+    '4 side': [true, 4]
+}
+  const baseMaterialImages = {
+    'FR-4': 1, 'Flex': 7, 'Aluminum': 2
+  };
+  const stiffener = {
+    'Without': false,
+    'Polyimide': 'Polyimide',
+    'FR4': 'FR4',
+    'Stainless Steel': 'Stainless Steel',
+    '3M Tape': '3M Tape'
+  };
+  const emi = {
+    'Without': false,
+    'Both sides ( Black ,18um )': 'Both sides ( Black ,18um )',
+    'Single side ( Black ,18um )': 'Single side ( Black ,18um )'
+  };
+  const cuttingMethod = {
+    'Laser Cutting': 'Laser Cutting',
+    'Punching': 'Punching'
+  };
+  const polyimideThickness = {
+    '0.1mm': '0.1mm',
+    '0.15mm': '0.15mm',
+    '0.20mm': '0.20mm',
+    '0.225mm': '0.225mm',
+    '0.25mm': '0.25mm'
+  };
+  const fr4Thickness = {
+    '1.6mm': '1.6mm',
+    '1.2mm': '1.2mm',
+    '0.8mm': '0.8mm',
+    '0.6mm': '0.6mm',
+    '1.0mm': '1.0mm',
+    '0.4mm': '0.4mm',
+    '0.2mm': '0.2mm',
+    '0.1mm': '0.1mm'
+  };
+  const stainlessSteelThickness = {
+    '0.3mm': '0.3mm',
+    '0.2mm': '0.2mm',
+    '0.1mm': '0.1mm'
+  };
+  const tapeThickness = {
+    '3M 9077 (HT,0.05mm)': '3M 9077 (HT,0.05mm)',
+    '3M468 (0.13mm)': '3M468 (0.13mm)'
+  };
+  const layers = {
+    '1': '1', '2': '2', '4': '4', '6': '6', '8': '8', '10': '10',
+    '12': '12', '14': '14', '16': '16', '18': '18', '20': '20'
+  };
   const design = [
     1, 2, 3, 4
   ];
-  const materialType = ['FR4-Standard TG 135-140', 'FR-4 TG155', 'FR-4 TG170'];
-  const edgeRails = ['No', 'On 2 Sides', 'On 4 Sides'];
-  const oz = ['1 oz', '2 oz'];
+  const materialType = {
+    'FR4-Standard TG 135-140': 'TG135',
+    // 'FR4-Standard TG 135-140': 'FR4-Standard TG 140',
+    'FR-4 TG155': 'TG155',
+    'FR-4 TG170': 'TG170'
+  };
+  const edgeRails = { 'No': false, 'On 2 Sides': 'On 2 Sides', 'On 4 Sides': 'On 4 Sides' };
+  // const oz = {'1 oz': '1 oz', '2 oz': '2 oz'};
   // const productType = ['Industrial/Consumer electronics', 'Aerospace', 'Medical'];
-  const deliveryOpt = ['Single PCB', 'Panel By Customer', 'Panel By JLCPCB'];
-  const oz2 = ['0.5 oz', '1 oz', '2 oz'];
-  const minVia = ['0.3mm/(0.4/0.45mm)', '0.25mm/(0.35/0.4mm)', '0.2mm/(0.3/0.35mm)', '0.15mm/(0.25/0.3mm)'];
-  const appearanceQuality = ['IPC Class 2 Standart', 'Superb Quality'];
-  const silkscreenTechnology = ['Ink-jet/Screen Printing Silkscreen', 'High-definition Exposure Silkscreen', 'High-precision Printing Silkscreen'];
-  const packageBox = ['With JLCPCB logo', 'Blank Box'];
-  const thickness = [0.4, 0.6, 0.8, 1.0, 1.2, 1.6, 2.0];
-  const color = ['Green', 'Purple', 'Red', 'Yellow', 'Blue', 'White', 'Black'];
-  const surface = ['HASL(with lead)', 'LeadFree HASL', 'ENIG'];
-  const pcbQtyOptions = [
+  const deliveryOpt = { 'Single PCB': 'Single PCB', 'Panel By Customer': 'Panel By Customer', 'Panel By JLCPCB': 'Panel By JLCPCB' };
+  const oz2 = { '0.5 oz': '0.5 oz', '1 oz': '1 oz', '2 oz': '2 oz' };
+  const minVia = {
+    '0.3mm/(0.4/0.45mm)': '0.3mm/(0.4/0.45mm)',
+    '0.25mm/(0.35/0.4mm)': '0.25mm/(0.35/0.4mm)',
+    '0.2mm/(0.3/0.35mm)': '0.2mm/(0.3/0.35mm)',
+    '0.15mm/(0.25/0.3mm)': '0.15mm/(0.25/0.3mm)'
+  };
+  const appearanceQuality = { 'IPC Class 2 Standart': 'IPC Class 2 Standart', 'Superb Quality': 'Superb Quality' };
+  // const silkscreenTechnology = ['Ink-jet/Screen Printing Silkscreen', 'High-definition Exposure Silkscreen', 'High-precision Printing Silkscreen'];
+  // const packageBox = ['With JLCPCB logo', 'Blank Box'];
+  const thickness = {
+    '0.4': '0.4',
+    '0.6': '0.6',
+    '0.8': '0.8',
+    '1.0': '1.0',
+    '1.2': '1.2',
+    '1.6': '1.6',
+    '2.0': '2.0'
+  };
+  const color = {
+    'Green': '绿',
+    'Purple': '嘉立创紫',
+    'Red': '红',
+    'Yellow': '黄',
+    'Blue': '蓝',
+    'White': '白',
+    'Black': '黑'
+  };
+
+  const surface = { 'HASL(with lead)': 'HASL(with lead)', 'LeadFree HASL': 'LeadFree HASL', 'ENIG': 'ENIG' };
+  const stencilCountsOptions = [
     5, 10, 15, 20, 25, 50, 75, 100, 125, 150, 200,
     250, 300, 350, 400, 450, 500, 600, 700, 800,
     900, 1000, 1500, 2000, 2500, 3000, 3500,
@@ -50,51 +123,69 @@ function TotalForm() {
   ];
   const layerStackup = ['No requirement', 'JLC04161H-7628', 'JLC04161H-3313', 'JLC04161H-1080', 'JLC04161H-7628A',
     'JLC04161H-7628B', 'JLC04161H-3313A', 'JLC04161H-1080A', 'JLC04161H-2116A', 'JLC04161H-2116B', 'JLC04161H-2116C'];
-  const goldThickness = ['1 U"', '2 U"'];
-  const viaCovering = ['Tented', 'Untented', 'Plugged', 'Epoxy Filled & Capped', 'Copper paste Filled & Capped'];
-  const boardTolerance = ['±0.2 mm (Regular)', '±0.1 mm (Precision)'];
-  const silkscreen = ['White', 'Black'];
-  const removeOrderNumber = ['No', 'Yes', 'Specify a location'];
-  const flyingProbeTest = ['Fully Test', 'Random Test', 'Not Test'];
-  const cooperType = ['Electro-deposite', 'Rolled Annealed'];
-  const coverlayThickness = ['PI:12.5um/AD:15um', 'PI:25um/AD:25um'];
-
-  const [edgeAndCastellatedState, setEdgeAndCastellatedState] = useState({
-    edgePlating: "No",
-    castellatedHoles: "No",
-    confirmFile: "Yes",
-    removeOrderNumber: "Yes",
-    goldFingers: "No",
-    kelvinTest: "No",
-    paper: "No",
-    fingerChamfered: "No",
-    control: "No",
-    stiffener: "No"
-  });
+  const goldThickness = { '1 U"': '1 U"', '2 U"': '2 U"' };
+  const viaCovering = {
+    'Tented': '过孔盖油',
+    'Untented': "过孔开窗",
+    'Plugged': "过孔塞油",
+    'Epoxy Filled & Capped': "过孔塞树脂",
+    'Copper paste Filled & Capped': '过孔塞铜浆'
+  };
+  const boardTolerance = { '±0.2 mm (Regular)': '±0.2 mm (Regular)', '±0.1 mm (Precision)': '±0.2 mm (Regular)' };
+  const silkscreen = {
+    'White': '白',
+    'Black': '黑'
+  };
+  // const removeOrderNumber = ['No', 'Yes', 'Specify a location'];
+  const flyingProbeTest = { 'Fully Test': 'Fully Test', 'Random Test': 'Fully Test', 'Not Test': 'Fully Test' };
+  const cooperType = {
+    'Electro-deposite': 'Electro-deposite',
+    'Rolled Annealed': 'Rolled Annealed'
+  };
+  const coverlayThickness = {
+    'PI:12.5um/AD:15um': 'PI:12.5um/AD:15um',
+    'PI:25um/AD:25um': 'PI:25um/AD:25um'
+  }
+  const hours = {
+    '24 hours': 18,
+    '24 hours (free expediting exclusive for SMT)':20,
+    '12 hours': 12,
+    '48 hours (free expediting)': 48
+  }
+  const [castHoles, setCastHoles]=useState({
+    selectedCastellatedHoles: 'No'
+  })
   const [inputValues, setInputValues] = useState({
-    height: 100,
-    width: 100,
-    design: null,
+    stencilLength: 100,
+    stencilWidth: 100,
     column: null,
-    row: null
+    row: null,
+    stencilNumber: null,
+    goldFingersThickness: null
   });
-  const [pcbQty, setPcbQty] = useState(5);
+  const [stencilCounts, setstencilCounts] = useState(5);
   const [selectedOption, setSelectedOption] = useState("mm");
   const [selectedData, setSelectedData] = useState({
+    produceOrderAccessId: "",
+    addOrderSource: 1,
+    guaranteeService: false,
+    impedance: false,
+    invoiceType: 11,
+    orderType: 1,
+    printHDChar: false,
     // selectedProductType: 'Industrial/Consumer electronics',
-    selectedNumber: 2,
+    stencilLayer: '2',
     selectedDelivery: 'Single PCB',
-    selectedImage: 'FR-4',
-    selectedPcbQty: null,
+    plateType: 'FR-4',
+    // selectedPcbQty: null,
     selectedCooperType: "Electro-deposite",
-    selectedDesign: 1,
-    selectedColor: "Green",
+    stencilNumber: 1,
+    adornColor: "Green",
     selectedSurface: "HASL(with lead)",
-    selectedThickness: 1.6,
+    stencilPly: '1.6',
     selectedGoldThickness: '1 U"',
     selectedCoverlayThickness: 'PI:12.5um/AD:15um',
-    selectedOz: "1 oz",
-    selectedViaCovering: "Tented",
+    adornBestrow: 'Tented',
     selectedBoardOutlineTolerance: "±0.2 mm (Regular)",
     selectedFlyingProbeTest: "Fully Test",
     selectedLayerStackup: "No requirement",
@@ -103,31 +194,54 @@ function TotalForm() {
     selectedEdgeRail: "No",
     selectedSilkscreen: 'White',
     selectedAppearanceQuality: "IPC Class 2 Standart",
-    selectedSilkscreenTechnology: "Ink-jet/Screen Printing Silkscreen",
-    selectedPackage: "With JLCPCB logo",
-    selectedMaterialType: "FR4-Standard TG 135-140",
+    // selectedSilkscreenTechnology: "Ink-jet/Screen Printing Silkscreen",
+    // selectedPackage: "With JLCPCB logo",
+    tgBoardLevel: "FR4-Standard TG 135-140",
     selectedStiffener: "Without",
     selectedEmi: "Without",
     selectedCuttingMethod: "Laser Cutting",
     selectedEdges: null,
+    selectedPolyimide: '0.1mm',
+    selectedFR4: '1.6mm',
+    selectedstainless: '0.3mm',
+    selectedTape: '3M 9077 (HT,0.05mm)',
+    selectedConductivity: '1W',
+    selectedVoltage: '3000W',
+    achieveHours: '24 hours',
+    madeSmt: 'Yes',
+    edgeGrinding: "No",
+    halfHole: false,
+    halfHoleNumber: 0,
+    // confirmFile: "Yes",
+    // removeOrderNumber: "Yes",
+    goldFingers: "No",
+    kelvinTest: "No",
+    paper: "No",
+    fingerChamfered: "No",
+    control: "No",
+    silkscreenStiffener: "No"
   });
 
   const [currentMaterialType, setCurrentMaterialType] = useState(materialType);
+  const [polyimideThicknessVisible, setpolyimideThicknessVisible] = useState(false);
+  const [fr4ThicknessVisible, setfr4ThicknessVisible] = useState(false);
+  const [stainlessSteelThicknessVisible, setstainlessSteelThicknessVisible] = useState(false);
+  const [tapeThicknessVisible, settapeThicknessVisible] = useState(false);
   const [currentEdgePlating, setCurrentEdgePlating] = useState(optionsYesNo);
-  const [currentCastellatedHoles, setCurrentCastellatedHoles] = useState(optionsYesNo);
+  const [currentCastellatedHoles, setCurrentCastellatedHoles] = useState(castellatedHoles);
   const [currentKelvinTest, setCurrentKelvinTest] = useState(optionsYesNo);
   const [currentViaCovering, setCurrentViaCovering] = useState(viaCovering);
   const [currentThickness, setCurrentThickness] = useState(thickness);
   const [currentGoldThickness, setCurrentGoldThickness] = useState(goldThickness);
   const [currentColor, setCurrentColor] = useState(color);
-  const [currentSilkscreenTechnology, setCurrentSilkscreenTechnology] = useState(silkscreenTechnology);
+  // const [currentSilkscreenTechnology, setCurrentSilkscreenTechnology] = useState(silkscreenTechnology);
   const [currentOz2, setCurrentOz2] = useState(oz2);
   const [currentCoverlayThickness, setCurrentCoverlayThickness] = useState(coverlayThickness);
   const [currentDelivery, setCurrentDelivery] = useState(deliveryOpt);
   const [currentDesign, setCurrentDesign] = useState(design);
   const [currentCooperType, setCurrentCooperType] = useState(cooperType);
   const [currentColorSilkScreen, setCurrentColorSilkScreen] = useState(silkscreen);
-  const [currentColorOz, setCurrentOz] = useState(oz);
+  // const [currentColorOz, setCurrentOz] = useState(oz);
   const [currentFlyingProbeTest, setCurrentFlyingProbeTest] = useState(flyingProbeTest);
   const [currentSurface, setCurrentSurface] = useState(surface);
   const [currentNumbers, setCurrentNumbers] = useState(layers);
@@ -148,6 +262,9 @@ function TotalForm() {
   const [addOptFlexVisible, setAddOptFlexVisible] = useState(false);
   const [addOptFRVisible, setAddOptFRVisible] = useState(false);
   const [goldThicknessVisible, setGoldThicknessVisible] = useState(false);
+  const [goldFingersThicknessVisible, setGoldFingersThicknessVisible] = useState(false);
+  const [viaVisible, setViaVisible]=useState(false);
+  const [addOptAluminiumVisible, setAddOptAluminiumVisible]= useState(false)
 
   useEffect(() => {
 
@@ -175,12 +292,6 @@ function TotalForm() {
     //   "invoiceType": 99,
     //   "orderType": 1,
     //   "printHDChar": false,
-    //   "stencilCounts": 5,
-    //   "stencilLayer": "2",
-    //   "stencilLength": 11,
-    //   "stencilNumber": 1,
-    //   "stencilPly": "1.6",
-    //   "stencilWidth": 11,
     //   "sestencilCountX": null,
     //   "sestencilCountY": null,
     //   "testProduct": 2,
@@ -194,7 +305,7 @@ function TotalForm() {
     //   "historyStencilType": null,
     //   "historyStencilCounts": 5,
     //   "historyStencilLength": "11",
-    //   "historyStencilWidth": "11",
+    //   "historyStencilstencilWidth": "11",
     //   "edgeGrinding": false,
     //   "lowResistanceTest": false,
     //   "isMakeup": null,
@@ -229,44 +340,22 @@ function TotalForm() {
     //   "madeSteel": false
     // }
 
-    // setSelectedData({
-    //   selectedColor: serverData.adornColor, 
-    // selectedProductType: serverData.,
-    // selectedNumber: serverData.stencilLayer,
-    // selectedDelivery: serverData.,
-    // selectedImage: serverData.,
-    // selectedPcbQty: serverData.,
-    // selectedCooperType: serverData.,
-    // selectedDesign: serverData.,
-    // selectedSurface: serverData.,
-    // selectedThickness: serverData.,
-    // selectedGoldThickness: serverData.,
-    // selectedCoverlayThickness: serverData.,
-    // selectedOz: serverData.,
-    // selectedViaCovering: serverData.,
-    // selectedBoardOutlineTolerance: serverData.,
-    // selectedFlyingProbeTest: serverData.,
-    // selectedLayerStackup: serverData.,
-    // selectedMinVia: serverData.,
-    // selectedOz2: serverData.,
-    // selectedEdgeRail: serverData.,
-    // selectedSilkscreen: serverData.,
-    // selectedAppearanceQuality: serverData.,
-    // selectedSilkscreenTechnology: serverData.,
-    // selectedPackage: serverData.,
-    // selectedMaterialType: serverData.,
-    // selectedStiffener: serverData.,
-    // selectedEmi: serverData.,
-    // selectedCuttingMethod: serverData.,
-    // });
-    
-    if (pcbQty < 50) {
-      setCurrentAppearanceQuality(appearanceQuality.slice(0, 1));
-      setCurrentFlyingProbeTest(flyingProbeTest.slice(0, 1));
+    if (stencilCounts < 50) {
+      const updatedOptionsTest = Object.fromEntries(
+        Object.entries(flyingProbeTest).slice(0, 1)
+      );
+      const updatedOptionsAppearanceQuality = Object.fromEntries(
+        Object.entries(appearanceQuality).slice(0, 1)
+      );
+      setCurrentAppearanceQuality(updatedOptionsAppearanceQuality);
+      setCurrentFlyingProbeTest(updatedOptionsTest);
     }
     else {
+      const updatedOptionsTest = Object.fromEntries(
+        Object.entries(flyingProbeTest).slice(0, 2)
+      );
       setCurrentAppearanceQuality(appearanceQuality);
-      setCurrentFlyingProbeTest(flyingProbeTest.slice(0, 2));
+      setCurrentFlyingProbeTest(updatedOptionsTest);
       setSelectedData((prevData) => ({
         ...prevData,
         selectedFlyingProbeTest: "Random Test",
@@ -278,221 +367,336 @@ function TotalForm() {
       setGoldThicknessVisible(false);
     }
 
-    if (selectedData.selectedProductType !== 'Industrial/Consumer electronics') {
-      setCurrentKelvinTest(optionsYesNo.slice(1));
-      edgeAndCastellatedState.kelvinTest = ("Yes");
-    }
-    else {
-      setCurrentKelvinTest(optionsYesNo);
-    }
-    if (selectedData.selectedDesign > 1) {
-      setCurrentDelivery(deliveryOpt.slice(1, 2));
-    }
-    else {
-      setCurrentDelivery(deliveryOpt);
-    }
-    if (selectedData.selectedDelivery === 'Panel By JLCPCB') {
-      setCurrentDesign(design.slice(0, 1));
-      setInputVisible(false);
-      setPanelFormat(true);
-      setEdgeRailVisible(true)
-    }
-    else if (selectedData.selectedDelivery === 'Panel By Customer') {
-      setPanelFormat(true);
-      setEdgeRailVisible(false);
-    }
-    else {
-      setCurrentDelivery(deliveryOpt);
-      setCurrentDesign(design);
+    // if (selectedData.selectedProductType !== 'Industrial/Consumer electronics') {
+    //   setCurrentKelvinTest(optionsYesNo.slice(1));
+    //   selectedData.kelvinTest = ("Yes");
+    // }
+    // else {
+    //   setCurrentKelvinTest(optionsYesNo);
+    // }
+    if (selectedData.stencilNumber > 1) {
+      const updatedOptionsDelivery = Object.fromEntries(
+        Object.entries(deliveryOpt).slice(1, 2)
+      );
       setInputVisible(true);
-      setPanelFormat(false);
-      setEdgeRailVisible(false);
+      setCurrentDelivery(updatedOptionsDelivery);
+    }
+    else {
+      setCurrentDelivery(deliveryOpt);
+      
+      if (selectedData.selectedDelivery === 'Panel By JLCPCB') {
+        setCurrentDesign(design.slice(0, 1));
+        setInputVisible(false);
+        setPanelFormat(true);
+        setEdgeRailVisible(true)
+      }
+      else if (selectedData.selectedDelivery === 'Panel By Customer') {
+        setPanelFormat(true);
+        setEdgeRailVisible(false);
+      }
+      else {
+        setCurrentDelivery(deliveryOpt);
+        setCurrentDesign(design);
+        setInputVisible(true);
+        setPanelFormat(false);
+        setEdgeRailVisible(false);
+      }
     }
 
-    if (edgeAndCastellatedState.control === "Yes") {
+    if (selectedData.control === "Yes") {
       setLayerStackupVisible(true);
     } else {
       setLayerStackupVisible(false);
     }
-    if (selectedData.selectedImage === 'FR-4') {
+    if (selectedData.plateType === 'FR-4') {
+      setAddOptAluminiumVisible(false)
+      setViaVisible(true);
+      setMaterialTypeVisible(true);
       setAddOptFRVisible(true);
       setCooperTypeVisible(false);
       setAddOptFlexVisible(false)
-      if (edgeAndCastellatedState.goldFingers === "Yes") {
-        setCurrentSurface(surface.slice(2));
+      if (selectedData.goldFingers === "Yes") {
+        const updatedOptionsSurface = Object.fromEntries(
+          Object.entries(surface).slice(2)
+        );
+        setCurrentSurface(updatedOptionsSurface);
         setSelectedData((prevData) => ({
           ...prevData,
           selectedSurface: "ENIG",
         }));
         setFingerChamferedVisible(true);
-        if(selectedData.selectedSurface!=="ENIG"){
-          alert('Please, select Gold Fingers with the value "No"')
+        if (selectedData.selectedSurface !== "ENIG") {
+
+          alert('"ENIG" was automatically selected. If u wanna select other surface, please, select Gold Fingers with the value "No"');
         }
       }
       else {
         setCurrentSurface(surface);
         setFingerChamferedVisible(false);
       }
-      if (selectedData.selectedNumber === 2) {
-        setCurrentEdgePlating(optionsYesNo.slice(0, 1));
-        setCurrentViaCovering(viaCovering.slice(0, 4));
-        setCurrentColorSilkScreen(silkscreen.slice(0, 1));
-        if (selectedData.selectedColor === "Red" || selectedData.selectedColor === "Yellow") {
-          setCurrentOz(oz);
-          setCurrentThickness(thickness.slice(1));
-        }
-        else if (selectedData.selectedColor === "White") {
-          setCurrentOz(oz);
-          setCurrentColorSilkScreen(silkscreen.slice(1));
-        }
-        else if (selectedData.selectedColor === "Black") {
-          setCurrentOz(oz.slice(0, 1))
-        }
-        else {
-          setCurrentOz(oz);
-        }
 
-        if (edgeAndCastellatedState.castellatedHoles === "Yes") {
+      if (selectedData.stencilLayer == 2) {
+        const updatedOptionsYesNo = Object.fromEntries(
+          Object.entries(optionsYesNo).slice(0, 1)
+        );
+        const updatedOptionsSilkscreen = Object.fromEntries(
+          Object.entries(silkscreen).slice(0, 1)
+        );
+        const updatedOptionsVia = Object.fromEntries(
+          Object.entries(viaCovering).slice(0, 4)
+        );
+        setCurrentEdgePlating(updatedOptionsYesNo);
+        setCurrentViaCovering(updatedOptionsVia);
+        setCurrentColorSilkScreen(updatedOptionsSilkscreen);
+        if (selectedData.adornColor === "Red" || selectedData.adornColor === "Yellow") {
+          // setCurrentOz(oz);
+          const updatedOptionsThickness = Object.fromEntries(
+            Object.entries(thickness).slice(1)
+          );
+          setCurrentThickness(updatedOptionsThickness);
+        }
+        else if (selectedData.adornColor === "White") {
+          const updatedOptionsSilkscreen = Object.fromEntries(
+            Object.entries(silkscreen).slice(1)
+            
+          );
+          // setCurrentOz(oz);
+          setCurrentColorSilkScreen(updatedOptionsSilkscreen);
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedSilkscreen: "Black",
+          }));
+        }
+        // else if (selectedData.adornColor === "Black") {
+        //   setCurrentOz(oz.slice(0, 1))
+        // }
+        // else {
+        //   setCurrentOz(oz);
+        // }
+
+        if (selectedData.halfHole === "Yes") {
+          const updatedOptionsLayers = Object.fromEntries(
+            Object.entries(layers).slice(1)
+          );
           setEdgesVisible(true);
-          setCurrentNumbers(layers.slice(1));
+          setCurrentNumbers(updatedOptionsLayers);
         }
         else {
           setEdgesVisible(false);
           setCurrentNumbers(layers);
         }
       }
-      if (selectedData.selectedNumber === 1) {
-        setCurrentEdgePlating(optionsYesNo.slice(0, 1));
-        setCurrentCastellatedHoles(optionsYesNo.slice(0, 1));
-        setCurrentViaCovering(viaCovering.slice(0, 2));
-        setCurrentThickness(thickness.slice(2));
-        setCurrentOz(oz.slice(0, 1));
+      if (selectedData.stencilLayer == 1) {
+        console.log(selectedData.stencilLayer, typeof selectedData.stencilLayer);
+        const updatedOptions = Object.fromEntries(
+          Object.entries(optionsYesNo).slice(0, 1)
+        );
+        const updatedOptionsCastellated = Object.fromEntries(
+          Object.entries(castellatedHoles).slice(0, 1)
+        );
+        const updatedOptionsThickness = Object.fromEntries(
+          Object.entries(thickness).slice(2)
+        );
+        const updatedOptionsVia = Object.fromEntries(
+          Object.entries(viaCovering).slice(0, 2)
+        );
+        setCurrentEdgePlating(updatedOptions);
+        setCurrentCastellatedHoles(updatedOptionsCastellated);
+        setCurrentViaCovering(updatedOptionsVia);
+        setCurrentThickness(updatedOptionsThickness);
+        // setCurrentOz(oz.slice(0, 1));
         setCurrentFlyingProbeTest(flyingProbeTest);
         setSelectedData((prevData) => ({
           ...prevData,
           selectedFlyingProbeTest: "Not Test",
         }));
 
-        if (selectedData.selectedColor === "White") {
-          setCurrentColorSilkScreen(silkscreen.slice(1));
+        if (selectedData.adornColor === "White") {
+          const updatedOptionsSilkscreen = Object.fromEntries(
+            Object.entries(silkscreen).slice(1)
+          );
+          setCurrentColorSilkScreen(updatedOptionsSilkscreen);
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedSilkscreen: "Black",
+          }));
         }
         else {
-          setCurrentColorSilkScreen(silkscreen.slice(0, 1));
+          const updatedOptionsSilkscreen = Object.fromEntries(
+            Object.entries(silkscreen).slice(0, 1)
+          );
+          setCurrentColorSilkScreen(updatedOptionsSilkscreen);
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedSilkscreen: "White",
+          }));
         }
 
       }
-      else if (selectedData.selectedNumber === 4) {
-        setCurrentThickness(thickness.slice(2));
-        setMaterialTypeVisible(true);
-        setCurrentViaCovering(viaCovering.slice(1));
-        setCurrentMaterialType(materialType.slice(0, 2));
+      else if (selectedData.stencilLayer == 4) {
+        const updatedOptionsThickness = Object.fromEntries(
+          Object.entries(thickness).slice(2)
+        );
+        const updatedOptionsVia = Object.fromEntries(
+          Object.entries(viaCovering).slice(1)
+        );
+        const updatedOptionsMaterialType = Object.fromEntries(
+          Object.entries(materialType).slice(0, 2)
+        );
+        setCurrentThickness(updatedOptionsThickness);
+        setCurrentViaCovering(updatedOptionsVia);
+        setCurrentMaterialType(updatedOptionsMaterialType);
         setSelectedData((prevData) => ({
           ...prevData,
-          selectedViaCovering: "Plugged",
+          adornBestrow: "Plugged",
         }));
         setAddOptVisible(true);
 
         if (selectedData.selectedProductType !== 'Industrial/Consumer electronics') {
           setSelectedData((prevData) => ({
             ...prevData,
-            selectedMaterialType: "FR-4 TG155",
+            tgBoardLevel: "FR-4 TG155",
           }));
         }
         else {
           setSelectedData((prevData) => ({
             ...prevData,
-            selectedMaterialType: "FR4-Standard TG 135-140",
+            tgBoardLevel: "FR4-Standard TG 135-140",
           }));
         }
 
       }
-      else if (selectedData.selectedNumber === 6 || selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10
-        || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16
-        || selectedData.selectedNumber === 18 || selectedData.selectedNumber === 20) {
-        setMaterialTypeVisible(true);
+      else if (selectedData.stencilLayer == 6 || selectedData.stencilLayer == 8 || selectedData.stencilLayer == 10
+        || selectedData.stencilLayer == 12 || selectedData.stencilLayer == 14 || selectedData.stencilLayer == 16
+        || selectedData.stencilLayer == 18 || selectedData.stencilLayer == 20) {
+        const updatedOptionsSurface = Object.fromEntries(
+          Object.entries(surface).slice(2)
+        );
+        const updatedOptionsThickness = Object.fromEntries(
+          Object.entries(thickness).slice(2)
+        );
         setAddOptVisible(true);
-        setCurrentSurface(surface.slice(2));
-        setCurrentThickness(thickness.slice(2));
+        setCurrentSurface(updatedOptionsSurface);
+        setCurrentThickness(updatedOptionsThickness);
         setSelectedData((prevData) => ({
           ...prevData,
           selectedSurface: "ENIG",
         }));
-        setCurrentGoldThickness(goldThickness.slice(1));
+        const updatedOptionsGoldThickness = Object.fromEntries(
+          Object.entries(goldThickness).slice(1)
+        );
+        setCurrentGoldThickness(updatedOptionsGoldThickness);
         setSelectedData((prevData) => ({
           ...prevData,
           selectedGoldThickness: '2 U"',
         }));
-        const filteredViaCovering = viaCovering.filter(item => item === 'Copper paste Filled & Capped' || item === 'Epoxy Filled & Capped');
-        const updatedViaCovering = filteredViaCovering.concat('Epoxy Filled & Untented');
-        setCurrentViaCovering(updatedViaCovering);
+        const filteredViaCovering = {
+          'Copper paste Filled & Capped': viaCovering['Copper paste Filled & Capped'],
+          'Epoxy Filled & Capped': viaCovering['Epoxy Filled & Capped']
+        };
+        filteredViaCovering['Epoxy Filled & Untented'] = '过孔开窗';
+
+        setCurrentViaCovering(filteredViaCovering);
         setSelectedData((prevData) => ({
           ...prevData,
-          selectedViaCovering: 'Epoxy Filled & Capped',
+          adornBestrow: 'Epoxy Filled & Capped',
         }));
-       
-        if (selectedData.selectedNumber === 6) {
-          setCurrentMaterialType(materialType.slice(0, 2));
-          setCurrentOz(oz);
+
+        if (selectedData.stencilLayer == 6) {
+          const updatedOptionsMaterialType = Object.fromEntries(
+            Object.entries(materialType).slice(0, 2)
+          );
+          setCurrentMaterialType(updatedOptionsMaterialType);
+          // setCurrentOz(oz);
           setCurrentOz2(oz2);
           setCurrentColor(color);
-          setCurrentSilkscreenTechnology(silkscreenTechnology.slice(0, 2));
+          // setCurrentSilkscreenTechnology(silkscreenTechnology.slice(0, 2));
           if (selectedData.selectedMinVia !== "0.3mm/(0.4/0.45mm)") {
-            setCurrentMaterialType(materialType.slice(1, 2));
+            const updatedOptionsMaterialType = Object.fromEntries(
+              Object.entries(materialType).slice(1, 2)
+            );
+            setCurrentMaterialType(updatedOptionsMaterialType);
             setSelectedData((prevData) => ({
               ...prevData,
-              selectedMaterialType: "FR-4 TG155",
+              tgBoardLevel: "FR-4 TG155",
             }));
           } else {
-            setCurrentMaterialType(materialType.slice(0, 2));
+            const updatedOptionsMaterialType = Object.fromEntries(
+              Object.entries(materialType).slice(0, 2)
+            );
+            setCurrentMaterialType(updatedOptionsMaterialType);
           }
 
-        } else if (selectedData.selectedNumber === 8 || selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12
-          || selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16 || selectedData.selectedNumber === 18
-          || selectedData.selectedNumber === 20) {
-          const updated = color.filter(item => item !== 'White');
+        } else if (selectedData.stencilLayer == 8 || selectedData.stencilLayer == 10 || selectedData.stencilLayer == 12
+          || selectedData.stencilLayer == 14 || selectedData.stencilLayer == 16 || selectedData.stencilLayer == 18
+          || selectedData.stencilLayer == 20) {
+          const updated = Object.fromEntries(
+            Object.entries(color).filter(([key, value]) => key !== 'White')
+          );
+          const updatedOptionsMaterialType = Object.fromEntries(
+            Object.entries(materialType).slice(1, 2)
+          );
+          const updatedOptionsOz2 = Object.fromEntries(
+            Object.entries(oz2).slice(0, 2)
+          );
           setCurrentColor(updated);
-          setCurrentMaterialType(materialType.slice(1, 2));
+          setCurrentMaterialType(updatedOptionsMaterialType);
           setSelectedData((prevData) => ({
             ...prevData,
-            selectedMaterialType: "FR-4 TG155",
+            tgBoardLevel: "FR-4 TG155",
           }));
-          setCurrentOz(oz.slice(0, 1));
-          setCurrentOz2(oz2.slice(0, 2));
-          if (selectedData.selectedNumber === 10 || selectedData.selectedNumber === 12 || selectedData.selectedNumber === 14
-            || selectedData.selectedNumber === 16 || selectedData.selectedNumber === 18 || selectedData.selectedNumber === 20) {
-            setCurrentThickness(thickness.slice(3));
-            setCurrentMaterialType(materialType.slice(2));
+          // setCurrentOz(oz.slice(0, 1));
+          setCurrentOz2(updatedOptionsOz2);
+          if (selectedData.stencilLayer == 10 || selectedData.stencilLayer == 12 || selectedData.stencilLayer == 14
+            || selectedData.stencilLayer == 16 || selectedData.stencilLayer == 18 || selectedData.stencilLayer == 20) {
+            const updatedOptionsThickness = Object.fromEntries(
+              Object.entries(thickness).slice(3)
+            );
+            const updatedOptionsMaterialType = Object.fromEntries(
+              Object.entries(materialType).slice(2)
+            );
+            setCurrentThickness(updatedOptionsThickness);
+            setCurrentMaterialType(updatedOptionsMaterialType);
             setSelectedData((prevData) => ({
               ...prevData,
-              selectedMaterialType: "FR-4 TG170",
+              tgBoardLevel: "FR-4 TG170",
             }));
-            if (selectedData.selectedNumber === 12) {
-              const filtered = thickness.filter(item => item === 1.2 || item === 1.6 || item === 2.0);
-              const updated = filtered.concat(2.5);
-              setCurrentThickness(updated);
-            } else if (selectedData.selectedNumber === 14 || selectedData.selectedNumber === 16) {
-              const filtered = thickness.filter(item => item === 1.6 || item === 2.0);
-              const updated = filtered.concat(2.5);
-              setCurrentThickness(updated);
-            } else if (selectedData.selectedNumber === 18 || selectedData.selectedNumber === 20) {
-              const filtered = thickness.filter(item => item === 2.0);
-              const updated = filtered.concat(2.5);
-              setCurrentThickness(updated);
+            if (selectedData.stencilLayer == 12) {
+              const filteredThickness = {
+                '1.2': thickness['1.2'],
+                '1.6': thickness['1.6'],
+                '2.0': thickness['2.0'],
+                '2.5': thickness['2.5']
+              };
+              setCurrentThickness(filteredThickness);
+            } else if (selectedData.stencilLayer == 14 || selectedData.stencilLayer == 16) {
+              const filteredThickness = {
+                '1.6': thickness['1.6'],
+                '2.0': thickness['2.0'],
+                '2.5': thickness['2.5']
+              };
+              setCurrentThickness(filteredThickness);
+            } else if (selectedData.stencilLayer == 18 || selectedData.stencilLayer == 20) {
+              const filteredThickness = {
+                '2.0': thickness['2.0'],
+                '2.5': thickness['2.5']
+              };
+              setCurrentThickness(filteredThickness);
               setSelectedData((prevData) => ({
                 ...prevData,
-                selectedMaterialType: 2.0,
+                stencilPly: '2.0',
               }));
             }
           }
         }
       }
       else {
-        setMaterialTypeVisible(false);
+        setCurrentColor(color);
         setAddOptVisible(false);
-        setCurrentCastellatedHoles(optionsYesNo);
+        setCurrentCastellatedHoles(castellatedHoles);
         setCurrentThickness(thickness);
-        setCurrentOz(oz);
-          setCurrentGoldThickness(goldThickness)
+        // setCurrentOz(oz);
+        setCurrentGoldThickness(goldThickness)
         setSelectedData((prevData) => ({
           ...prevData,
           selectedFlyingProbeTest: "Fully Test",
@@ -501,250 +705,252 @@ function TotalForm() {
 
       }
 
-    } else if (selectedData.selectedImage === "Flex") {
-      setAddOptFRVisible(false);
-      setCurrentNumbers(layers.slice(0, 2));
+    } else if (selectedData.plateType === "Aluminum") {
+      setAddOptAluminiumVisible(true)
+      // const updatedOptionsLayers = Object.fromEntries(
+      //   Object.entries(layers).slice(0, 1)
+      // );
+      
+      setMaterialTypeVisible(false)
+      setViaVisible(false);
+      setAddOptFRVisible(true)
+      setAddOptFlexVisible(false)
+      const filteredLayers = {
+        '1': layers['1'],
+      };      
+      setCurrentNumbers(filteredLayers);
       setSelectedData((prevData) => ({
         ...prevData,
-        selectedNumber: 2,
+        stencilLayer: '1',
       }));
-      const filtered = thickness.concat(0.11, 0.12, 0.2);
-      const updated = filtered.slice(7);
-      setCurrentThickness(updated);
-      const filteredColor = color.filter(item => item === "Yellow" || item === "Black" || item === "White");
+      const updatedOptionsThickness = Object.fromEntries(
+        Object.entries(thickness).slice(3, -1)
+      );
+      setCurrentThickness(updatedOptionsThickness);
+      setSelectedData((prevData) => ({
+        ...prevData,
+        stencilLayer: "1.6",
+      }));
+      const filteredColor = Object.fromEntries(
+        Object.entries(color).filter(([key, value]) => key === 'White' || key === "Black")
+      );
       setCurrentColor(filteredColor);
       setSelectedData((prevData) => ({
         ...prevData,
-        selectedColor: "Yellow",
+        adornColor: "White",
       }));
-      setMaterialTypeVisible(false);
-      setCooperTypeVisible(true);
-      setCurrentCooperType(cooperType.slice(0, 1));
-      const filteredOz = oz.filter(item => item === "1 oz");
-      const updatedOz = filteredOz.concat("1/3 oz", "0.5 oz");
-      setCurrentOz(updatedOz);
-      setAddOptFlexVisible(true);
-      if (edgeAndCastellatedState.goldFingers === "Yes") {
-        setCurrentSurface(surface.slice(2));
+      const updatedOptionsSurface = Object.fromEntries(
+        Object.entries(surface).slice(0,2)
+      );
+      setCurrentSurface(updatedOptionsSurface);
+      setSelectedData((prevData) => ({
+        ...prevData,
+        selectedSurface: 'HASL(with lead)',
+      }));
+setCurrentFlyingProbeTest(flyingProbeTest);
+      setSelectedData((prevData) => ({
+        ...prevData,
+        selectedFlyingProbeTest: "Fully Test",
+      }));
+      const filteredGoldFingers = Object.fromEntries(
+        Object.entries(goldThickness).slice(0,1)
+      );
+      setCurrentGoldThickness(filteredGoldFingers);
+      setSelectedData((prevData) => ({
+        ...prevData,
+        selectedGoldThickness: 'No',
+      }));
+      const filteredCastellated = Object.fromEntries(
+        Object.entries(castellatedHoles).slice(0,1)
+      );
+      setCurrentCastellatedHoles(filteredCastellated);
+      setSelectedData((prevData) => ({
+        ...selectedData,
+        halfHole: 'No',
+      }));
+
+      if (selectedData.adornColor === "White") {
+        const updatedOptionsSilkscreen = Object.fromEntries(
+          Object.entries(silkscreen).slice(1)
+        );
+        setCurrentColorSilkScreen(updatedOptionsSilkscreen);
         setSelectedData((prevData) => ({
           ...prevData,
-          selectedSurface: 'ENIG',
+          selectedSilkscreen: "Black",
         }));
-        setFingerChamferedVisible(true);
       }
       else {
-        setFingerChamferedVisible(false);
+        const updatedOptionsSilkscreen = Object.fromEntries(
+          Object.entries(silkscreen).slice(0, 1)
+        );
+        setCurrentColorSilkScreen(updatedOptionsSilkscreen);
+        setSelectedData((prevData) => ({
+          ...prevData,
+          selectedSilkscreen: "White",
+        }));
       }
-      if (selectedData.selectedThickness === 0.11) {
-        setCurrentOz(updatedOz.slice(1, 2));
-        setSelectedData((prevData) => ({
-          ...prevData,
-          selectedOz: "1/3 oz",
-        }));
-        setCurrentCoverlayThickness(coverlayThickness.slice(0, 1));
-        setSelectedData((prevData) => ({
-          ...prevData,
-          selectedCoverlayThickness: "PI:12.5um/AD:15um",
-        }));
-      } else if (selectedData.selectedThickness === 0.12) {
-        setCurrentOz(updatedOz.slice(2));
-        setSelectedData((prevData) => ({
-          ...prevData,
-          selectedOz: "0.5 oz",
-        }));
-        setCurrentCoverlayThickness(coverlayThickness.slice(0, 1))
-        setSelectedData((prevData) => ({
-          ...prevData,
-          selectedCoverlayThickness: "PI:12.5um/AD:15um",
-        }));
+
+    }
+  }, [
+    selectedData.plateType, selectedData.stencilLayer, selectedData.stencilNumber, selectedData.selectedDelivery,
+    selectedData.adornColor, selectedData.halfHole, selectedData.goldFingers, stencilCounts,
+    selectedData.selectedSurface, selectedData.selectedProductType, selectedData.control, selectedData.selectedMinVia,
+    selectedData.stencilPly, inputValues.design, selectedData.selectedStiffener
+  ]);
+  useEffect(() => {
+    if (selectedData.plateType === "Flex") {
+      setAddOptAluminiumVisible(false)
+      console.log("selectedData.selectedStiffener:", selectedData.selectedStiffener);
+      if (selectedData.selectedStiffener === 'Polyimide') {
+        console.log("Setting polyimideThicknessVisible to true");
+        setpolyimideThicknessVisible(true)
+      } else if (selectedData.selectedStiffener === 'FR-4') {
+        console.log("Setting fr4ThicknessVisible to true");
+        setfr4ThicknessVisible(true);
+      } else if (selectedData.selectedStiffener === 'Stainless Steel') {
+        console.log("Setting stainlessSteelThicknessVisible to true");
+        setstainlessSteelThicknessVisible(true);
+      } else if (selectedData.selectedStiffener === '3M Tape') {
+        console.log("Setting tapeThicknessVisible to true");
+        settapeThicknessVisible(true);
       } else {
-        setCurrentOz(updatedOz.slice(0, 1));
-        setCurrentCoverlayThickness(coverlayThickness.slice(1))
+        console.log("Setting all thicknessVisible states to false");
+        setpolyimideThicknessVisible(false);
+        setfr4ThicknessVisible(false);
+        setstainlessSteelThicknessVisible(false);
+        settapeThicknessVisible(false);
+      }
+
+      // if (!inputValues.length && !stencilCounts.length) {
+      setMaterialTypeVisible(false);
+      const updatedOptionsLayers = Object.fromEntries(
+        Object.entries(layers).slice(0, 2)
+      );
+      setAddOptFRVisible(false);
+      setCurrentNumbers(updatedOptionsLayers);
+      const filteredColor = Object.fromEntries(
+        Object.entries(color).filter(([key, value]) => key === 'White' || key === "Yellow" || key === "Black")
+      );
+      setSelectedData((prevData) => ({
+        ...prevData,
+        stencilLayer: '2',
+        adornColor: "Yellow"
+      }));
+      const updatedOptionsCooperType = Object.fromEntries(
+        Object.entries(cooperType).slice(0, 1)
+      );
+      setCurrentColor(filteredColor);
+      setCooperTypeVisible(true);
+      setCurrentCooperType(updatedOptionsCooperType);
+      setAddOptFlexVisible(true);
+      const updatedOptionsSurface = Object.fromEntries(
+        Object.entries(surface).slice(2)
+      );
+      setCurrentSurface(updatedOptionsSurface);
+      setSelectedData((prevData) => ({
+        ...prevData,
+        selectedSurface: 'ENIG',
+      }));
+      if (selectedData.goldFingers === "Yes") {
+        setGoldFingersThicknessVisible(true);
+      } else {
+        setGoldFingersThicknessVisible(false);
+      }
+
+      if (selectedData.stencilLayer == 2) {
+        const filteredThickness = {
+          '0.11': thickness['0.11'],
+          '0.12': thickness['0.12'],
+          '0.2': thickness['0.2']
+        };
+        setCurrentThickness(filteredThickness);
         setSelectedData((prevData) => ({
           ...prevData,
-          selectedOz: "1 oz",
+          stencilPly: '0.11'
         }));
+        if (selectedData.stencilPly === 0.11) {
+          const updatedOptionsCoverlayThickness = Object.fromEntries(
+            Object.entries(coverlayThickness).slice(0, 1)
+          );
+          setCurrentCoverlayThickness(updatedOptionsCoverlayThickness);
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedCoverlayThickness: "PI:12.5um/AD:15um",
+          }));
+        } else if (selectedData.stencilPly === 0.12) {
+          const updatedOptionsCoverlayThickness = Object.fromEntries(
+            Object.entries(coverlayThickness).slice(0, 1)
+          );
+          setCurrentCoverlayThickness(updatedOptionsCoverlayThickness)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedCoverlayThickness: "PI:12.5um/AD:15um",
+          }));
+        } else {
+          const updatedOptionsCoverlayThickness = Object.fromEntries(
+            Object.entries(coverlayThickness).slice(1)
+          );
+          setCurrentCoverlayThickness(updatedOptionsCoverlayThickness)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            selectedCoverlayThickness: "PI:25um/AD:25um",
+          }));
+        }
+      } else {
+        const filteredThickness = {
+          '0.7': thickness['0.7'],
+          '0.11': thickness['0.11']
+        };
+        setCurrentThickness(filteredThickness);
         setSelectedData((prevData) => ({
           ...prevData,
-          selectedCoverlayThickness: "PI:25um/AD:25um",
+          stencilPly: '0.7'
         }));
       }
     }
-  }, [selectedData.selectedImage, selectedData.selectedNumber, selectedData.selectedDesign, selectedData.selectedDelivery,
-  selectedData.selectedColor, edgeAndCastellatedState.castellatedHoles, edgeAndCastellatedState.goldFingers, pcbQty,
-  selectedData.selectedSurface, selectedData.selectedProductType, edgeAndCastellatedState.control, selectedData.selectedMinVia,
-  selectedData.selectedThickness]);
+    // }
+  }, [
+    selectedData.plateType, selectedData.stencilNumber, selectedData.selectedDelivery, selectedData.halfHole,
+    selectedData.goldFingers, stencilCounts, selectedData.selectedSurface, selectedData.selectedProductType,
+    selectedData.control, selectedData.selectedMinVia, inputValues.design, selectedData.selectedStiffener
+  ])
+  // useEffect(()=>{
+
+  // },[
+  //   selectedData.plateType, selectedData.selectedDesign, selectedData.selectedDelivery, selectedData.halfHole, 
+  //   selectedData.goldFingers, stencilCounts, selectedData.selectedSurface, selectedData.selectedProductType, 
+  //   selectedData.control, selectedData.selectedMinVia, inputValues.design, selectedData.selectedStiffener, selectedData.stencilLayer
+  // ])
 
 
-  const handleMinViaChange = (e) => {
-    setSelectedData((prevData) => ({
+  const handleCastellatedHolesChange = (field, value) => {
+    const [halfHole, halfHoleNumber] = castellatedHoles[value];
+  
+    setSelectedData(prevData => ({
       ...prevData,
-      selectedMinVia: e.target.value,
+      halfHole: halfHole,
+      halfHoleNumber: halfHoleNumber
     }));
-  };
-
-  const handleLayerStackupChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedLayerStackup: e.target.value,
-    }));
-  };
-  const handleControlChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      control: selectedValue
+  
+    setCastHoles({
+      ...castHoles,
+      [field]: value,
     });
-  };
-  const handleStiffenerChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      stiffener: selectedValue
-    });
-  };
-  const handleOz2Change = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedOz2: e.target.value,
-    }));
-  };
-
-  const handleKelvinTestChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      kelvinTest: selectedValue
-    });
-  };
-  const handlePaperChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      paper: selectedValue
-    });
-  };
-  const handleAppearanceQualityChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedAppearanceQuality: e.target.value,
-    }));
+  
+    console.log(halfHole, halfHoleNumber);
   };
   
-  const handleSilkscreenTechnologyChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedSilkscreenTechnology: e.target.value,
-    }));
-  };
-  const handlePackageChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedPackage: e.target.value,
-    }));
-  };
-  const handleMaterialTypeChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedMaterialType: e.target.value,
-    }));
-  };
-  const handleViaCoveringChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedViaCovering: e.target.value,
-    }));
-  };
-  const handleGoldThicknessChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedGoldThickness: e.target.value,
-    }));
-  };
-  const handleBoardOutlineToleranceChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedBoardOutlineTolerance: e.target.value,
-    }));
-  };
-  const handleFlyingProbeTestChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedFlyingProbeTest: e.target.value,
-    }));
-  };
-  const handleEdgesRailsChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedEdgesRails: e.target.value,
-    }));
-  };
-  const handleConfirmFileChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      confirmFile: selectedValue
-    });
-  };
-  const handleRemoveOrderNumberChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      removeOrderNumber: selectedValue
-    });
-  };
-  const handleGoldFingersChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      goldFingers: selectedValue
-    });
-  };
-  const handleCastellatedHolesChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      castellatedHoles: selectedValue
-    });
-  };
-  const handleFingerChamferedChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      fingerChamfered: selectedValue
-    });
-  };
-  const handleEdgeChange = (e) => {
-    const selectedValue = e.target.value;
-    setEdgeAndCastellatedState({
-      ...edgeAndCastellatedState,
-      edgePlating: selectedValue
-    });
-  };
-  const handleImageChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedImage: e.target.value,
-    }));
-  };
 
-  const handleOzChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedOz: e.target.value,
-    }));
-  };
-  const handleProductTypeChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedProductType: e.target.value,
-    }));
-  };
-  const handleEdgesChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedEdges: e.target.value,
-    }));
+  const handleEnterKeyPress = () => {
+    if (inputValues.stencilNumber > 1) {
+      const updatedOptionsDelivery = Object.fromEntries(
+        Object.entries(deliveryOpt).slice(1, 2)
+      );
+      setCurrentDelivery(updatedOptionsDelivery);
+    }
+    else {
+      setCurrentDelivery(deliveryOpt);
+    }
   };
   const handlePcbQtyChange = (e) => {
     const selectedValue = parseInt(e.target.value);
@@ -754,87 +960,88 @@ function TotalForm() {
     }));
     setPcbQtyVisible(false);
   };
-  const handleDeliveryChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedDelivery: e.target.value,
-    }));
-  };
-  const handleSilkscreenChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedSilkscreen: e.target.value,
-    }));
-  };
-  const handleThicknessChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedThickness: e.target.value,
-    }));
-  };
-  const handleColorChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedColor: e.target.value,
-    }));
-  };
-  const handleSurfaceChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedSurface: e.target.value,
-    }));
-  };
+ 
   const handleInputValuesChange = (field, value) => {
     setInputValues({
       ...inputValues,
       [field]: value,
     });
   };
+  const handleOptValuesChange=(field,value)=>{
+    setSelectedData({
+      ...selectedData,
+      [field]:value,
+    })
+  }
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
-  const handleCooperTypeChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedCooperType: e.target.value,
-    }));
-  };
-  const handleDesignChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedDesign: e.target.value,
-    }));
-  };
-  const handleCoverlayThicknessChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedCoverlayThickness: e.target.value,
-    }));
-  };
-  const handleNumberChange = (e) => {
-    setSelectedData((prevData) => ({
-      ...prevData,
-      selectedNumber: parseInt(e.target.value, 10),
-    }));
-  };
+
   const saveJsonToFile = () => {
-  const combinedData = { ...edgeAndCastellatedState, ...inputValues };
-  const finalData = { ...selectedData, ...combinedData };
-  const jsonData = JSON.stringify(finalData, null, 2);
-  const blob = new Blob([jsonData], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'data.json';
-  const clickEvent = new MouseEvent('click');
-  a.dispatchEvent(clickEvent);
-  URL.revokeObjectURL(url);
+     const {
+        produceOrderAccessId,
+        addOrderSource,
+        guaranteeService,
+        impedance,
+        invoiceType,
+        orderType,
+        printHDChar,
+        stencilLayer,
+        plateType,
+        stencilNumber,
+        adornColor,
+        stencilPly,
+        adornBestrow,
+        tgBoardLevel,
+        achieveHours,
+        madeSmt,
+        edgeGrinding,
+        halfHole,
+        halfHoleNumber
+    } = selectedData;
+    const finalData = {
+      produceOrderAccessId,
+        addOrderSource,
+        guaranteeService,
+        impedance,
+        invoiceType,
+        orderType,
+        printHDChar,
+        stencilLayer: stencilLayer.toString(),
+        plateType: baseMaterialImages[plateType],
+        stencilNumber,
+        adornColor: color[adornColor],
+        stencilPly: stencilPly.toString(),
+        adornBestrow: viaCovering[adornBestrow] ,
+        tgBoardLevel: materialType[tgBoardLevel],
+        achieveHours:hours[achieveHours],
+        madeSmt: optionsYesNo[madeSmt],
+        edgeGrinding: optionsYesNo[edgeGrinding],
+        halfHole,
+        halfHoleNumber,
+      ...inputValues,
+      
+    };
+    if (inputValues.stencilNumber !== null) {
+      finalData.stencilNumber = parseInt(inputValues.stencilNumber);
+  } else {
+      finalData.stencilNumber = parseInt(selectedData.stencilNumber);
+  }
+    const jsonData = JSON.stringify(finalData, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    const clickEvent = new MouseEvent('click');
+    a.dispatchEvent(clickEvent);
+    URL.revokeObjectURL(url);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   const handlePCBQtyValue = (value) => {
-    setPcbQty(value);
+    setstencilCounts(value);
     setPcbQtyVisible(false);
   };
 
@@ -851,23 +1058,23 @@ function TotalForm() {
     <div>
       <form className="form" onSubmit={handleSubmit}>
         <ModalForm
-          pcbQty={pcbQty}
+          stencilCounts={stencilCounts}
           selectedOption={selectedOption}
-          inputValuesHeight={inputValues.height}
-          inputValuesWidth={inputValues.width}
+          inputValuesstencilLength={inputValues.stencilLength}
+          inputValuesstencilWidth={inputValues.stencilWidth}
           handlePcbQtyChange={handlePcbQtyChange}
-          handleInputWidthChange={(e) => handleInputValuesChange('width', e.target.value)}
-          handleInputHeightChange={(e) => handleInputValuesChange('height', e.target.value)}
+          handleInputstencilWidthChange={(e) => handleInputValuesChange('stencilWidth', e.target.value)}
+          handleInputstencilLengthChange={(e) => handleInputValuesChange('stencilLength', e.target.value)}
           handleOptionChange={handleOptionChange}
           baseMaterialImages={baseMaterialImages}
-          handleImageChange={handleImageChange}
-          selectedImage={selectedData.selectedImage}
-          handleNumberChange={handleNumberChange}
-          selectedNumber={selectedData.selectedNumber}
-          pcbQtyOptions={pcbQtyOptions}
+          handleImageChange={(e) => handleOptValuesChange('plateType', e.target.value)}
+          plateType={selectedData.plateType}
+          handleNumberChange={(e) => handleOptValuesChange('stencilLayer', e.target.value)}
+          stencilLayer={selectedData.stencilLayer}
+          stencilCountsOptions={stencilCountsOptions}
           // productType={productType}
           selectedProductType={selectedData.selectedProductType}
-          handleProductTypeChange={handleProductTypeChange}
+          handleProductTypeChange={(e) => handleOptValuesChange('selectedProductType', e.target.value)}
           pcbQtyVisible={pcbQtyVisible}
           setPcbQtyVisible={setPcbQtyVisible}
           handlePCBQtyValue={handlePCBQtyValue}
@@ -878,28 +1085,29 @@ function TotalForm() {
         <Specifications
           specificationsVisible={specificationsVisible}
           toggleSpecificationsVisibility={toggleSpecificationsVisibility}
-          selectedDesign={selectedData.selectedDesign}
-          selectedMaterialType={selectedData.selectedMaterialType}
+          selectedDesign={selectedData.stencilNumber}
+          selectedMaterialType={selectedData.tgBoardLevel}
           currentMaterialType={currentMaterialType}
-          handleMaterialTypeChange={handleMaterialTypeChange}
-          handleDesignChange={handleDesignChange}
+          handleMaterialTypeChange={(e) => handleOptValuesChange('tgBoardLevel', e.target.value)}
+          handleDesignChange={(e) => handleOptValuesChange('stencilNumber', e.target.value)}
           currentSurface={currentSurface}
+          handleEnterKeyPress={handleEnterKeyPress}
           inputValuesColumn={inputValues.column}
           inputValuesRow={inputValues.row}
-          handleInputDesignChange={(e) => handleInputValuesChange('design', e.target.value)}
+          handleInputDesignChange={(e) => handleInputValuesChange('stencilNumber', e.target.value)}
           handleInputColumnChange={(e) => handleInputValuesChange('column', e.target.value)}
           handleInputRowChange={(e) => handleInputValuesChange('row', e.target.value)}
           inputValueDesign={inputValues.design}
           selectedDelivery={selectedData.selectedDelivery}
-          selectedThickness={selectedData.selectedThickness}
-          handleDeliveryChange={handleDeliveryChange}
+          stencilPly={selectedData.stencilPly}
+          handleDeliveryChange={(e) => handleOptValuesChange('selectedDelivery', e.target.value)}
           currentColor={currentColor}
-          handleColorChange={handleColorChange}
-          handleSurfaceChange={handleSurfaceChange}
+          handleColorChange={(e) => handleOptValuesChange('adornColor', e.target.value)}
+          handleSurfaceChange={(e) => handleOptValuesChange('selectedSurface', e.target.value)}
           selectedSurface={selectedData.selectedSurface}
-          selectedColor={selectedData.selectedColor}
-          handleThicknessChange={handleThicknessChange}
-          handleSilkscreenChange={handleSilkscreenChange}
+          adornColor={selectedData.adornColor}
+          handleThicknessChange={(e) => handleOptValuesChange('stencilPly', e.target.value)}
+          handleSilkscreenChange={(e) => handleOptValuesChange('selectedSilkscreen', e.target.value)}
           selectedSilkscreen={selectedData.selectedSilkscreen}
           currentThickness={currentThickness}
           currentDelivery={currentDelivery}
@@ -907,100 +1115,136 @@ function TotalForm() {
           inputVisible={inputVisible}
           panelFormat={panelFormat}
           edgeRails={edgeRails}
-          handleEdgesRailsChange={handleEdgesRailsChange}
+          handleEdgesRailsChange={(e) => handleOptValuesChange('selectedEdgesRails', e.target.value)}
           selectedEdgeRail={selectedData.selectedEdgeRail}
           edgeRailVisible={edgeRailVisible}
           currentColorSilkScreen={currentColorSilkScreen}
           goldThicknessVisible={goldThicknessVisible}
-          handleGoldThicknessChange={handleGoldThicknessChange}
+          handleGoldThicknessChange={(e) => handleOptValuesChange('selectedGoldThickness', e.target.value)}
           currentGoldThickness={currentGoldThickness}
           selectedGoldThickness={selectedData.selectedGoldThickness}
           materialTypeVisible={materialTypeVisible}
           cooperTypeVisible={cooperTypeVisible}
           selectedCooperType={selectedData.selectedCooperType}
           currentCooperType={currentCooperType}
-          handleCooperTypeChange={handleCooperTypeChange}
+          handleCooperTypeChange={(e) => handleOptValuesChange('selectedCooperType', e.target.value)}
         />
         <HighOpt
           addOptFRVisible={addOptFRVisible}
           selectedCoverlayThickness={selectedData.selectedCoverlayThickness}
           currentCoverlayThickness={currentCoverlayThickness}
-          handleCoverlayThicknessChange={handleCoverlayThicknessChange}
+          handleCoverlayThicknessChange={(e) => handleOptValuesChange('selectedCoverlayThickness', e.target.value)}
           layerStackup={layerStackup}
-          handleMinViaChange={handleMinViaChange}
+          handleMinViaChange={(e) => handleOptValuesChange('selectedMinVia', e.target.value)}
+          inputValuesGoldFingersThickness={inputValues.goldFingersThickness}
+          handleInputGoldFingersThicknessChange={(e) => handleInputValuesChange('goldFingersThickness', e.target.value)}
           selectedMinVia={selectedData.selectedMinVia}
           currentOz2={currentOz2}
           minVia={minVia}
+          cuttingMethod={cuttingMethod}
+          handleFR4Change={(e) => handleOptValuesChange('selectedFR4', e.target.value)}
+          selectedFR4={selectedData.selectedFR4}
+          handlePolyimideChange={(e) => handleOptValuesChange('selectedPolyimide', e.target.value)}
+          selectedPolyimide={selectedData.selectedPolyimide}
+          handleStainlessChange={(e) => handleOptValuesChange('selectedstainless', e.target.value)}
+          selectedstainless={selectedData.selectedstainless}
+          handleTapeChange={(e) => handleOptValuesChange('selectedTape', e.target.value)}
+          selectedTape={selectedData.selectedTape}
+          polyimideThicknessVisible={polyimideThicknessVisible}
+          fr4ThicknessVisible={fr4ThicknessVisible}
+          stainlessSteelThicknessVisible={stainlessSteelThicknessVisible}
+          tapeThicknessVisible={tapeThicknessVisible}
+          polyimideThickness={polyimideThickness}
+          fr4Thickness={fr4Thickness}
+          stainlessSteelThickness={stainlessSteelThickness}
+          tapeThickness={tapeThickness}
+          handleCuttingMethodChange={(e) => handleOptValuesChange('selectedCuttingMethod', e.target.value)}
+          selectedCuttingMethod={selectedData.selectedCuttingMethod}
+          handleEmiChange={(e) => handleOptValuesChange('selectedEmi', e.target.value)}
+          selectedEmi={selectedData.selectedEmi}
           selectedLayerStackup={selectedData.selectedLayerStackup}
-          selectedControl={edgeAndCastellatedState.control}
+          selectedControl={selectedData.control}
           selectedOz2={selectedData.selectedOz2}
-          handleLayerStackupChange={handleLayerStackupChange}
-          handleControlChange={handleControlChange}
-          handleOz2Change={handleOz2Change}
+          handleLayerStackupChange={(e) => handleOptValuesChange('selectedLayerStackup', e.target.value)}
+          handleControlChange={(e) => handleOptValuesChange('control', e.target.value)}
+          handleOz2Change={(e) => handleOptValuesChange('selectedOz2', e.target.value)}
           layerStackupVisible={layerStackupVisible}
           addOptVisible={addOptVisible}
           addOptFlexVisible={addOptFlexVisible}
           highOptVisible={highOptVisible}
-          currentColorOz={currentColorOz}
+          viaVisible={viaVisible}
+          addOptAluminiumVisible={addOptAluminiumVisible}
+          // currentColorOz={currentColorOz}
           toggleHighOptVisibility={toggleHighOptVisibility}
-          selectedOz={selectedData.selectedOz}
-          handleOzChange={handleOzChange}
-          selectedViaCovering={selectedData.selectedViaCovering}
-          handleStiffenerChange={handleStiffenerChange}
+          adornBestrow={selectedData.adornBestrow}
+          handleStiffenerChange={(e) => handleOptValuesChange('selectedStiffener', e.target.value)}
+          handleSilkscreenStiffenerChange={(e) => handleOptValuesChange('silkscreenStiffener', e.target.value)}
+          selectedSilkscreenStiffener={selectedData.silkscreenStiffener}
           selectedBoardOutlineTolerance={selectedData.selectedBoardOutlineTolerance}
           selectedFlyingProbeTest={selectedData.selectedFlyingProbeTest}
-          selectedConfirmFile={edgeAndCastellatedState.confirmFile}
-          selectedSilkscreenStiffener={edgeAndCastellatedState.stiffener}
-          selectedRemoveOrderNumber={edgeAndCastellatedState.removeOrderNumber}
-          selectedGoldFingers={edgeAndCastellatedState.goldFingers}
-          selectedCastellatedHoles={edgeAndCastellatedState.castellatedHoles}
-          selectedEdgePlating={edgeAndCastellatedState.edgePlating}
-          selectedFingerChamfered={edgeAndCastellatedState.fingerChamfered}
+          // selectedConfirmFile={selectedData.confirmFile}
+          selectedStiffener={selectedData.selectedStiffener}
+          // selectedRemoveOrderNumber={selectedData.removeOrderNumber}
+          selectedGoldFingers={selectedData.goldFingers}
+          selectedCastellatedHoles={castHoles.selectedCastellatedHoles}
+          handleCastellatedHolesChange={(e) => handleCastellatedHolesChange('selectedCastellatedHoles', e.target.value)}
+          // halfHoleNumber={selectedData.halfHoleNumber}
+          selectedEdgePlating={selectedData.edgeGrinding}
+          selectedFingerChamfered={selectedData.fingerChamfered}
           boardTolerance={boardTolerance}
           optionsYesNo={optionsYesNo}
-          removeOrderNumber={removeOrderNumber}
-          handleViaCoveringChange={handleViaCoveringChange}
-          handleBoardOutlineToleranceChange={handleBoardOutlineToleranceChange}
-          handleFlyingProbeTestChange={handleFlyingProbeTestChange}
-          handleConfirmFileChange={handleConfirmFileChange}
-          handleRemoveOrderNumberChange={handleRemoveOrderNumberChange}
-          handleGoldFingersChange={handleGoldFingersChange}
-          handleCastellatedHolesChange={handleCastellatedHolesChange}
-          handleEdgeChange={handleEdgeChange}
+          // removeOrderNumber={removeOrderNumber}
+          handleViaCoveringChange={(e) => handleOptValuesChange('adornBestrow', e.target.value)}
+          handleBoardOutlineToleranceChange={(e) => handleOptValuesChange('selectedBoardOutlineTolerance', e.target.value)}
+          handleFlyingProbeTestChange={(e) => handleOptValuesChange('selectedFlyingProbeTest', e.target.value)}
+          // handleConfirmFileChange={handleConfirmFileChange}
+          // handleRemoveOrderNumberChange={handleRemoveOrderNumberChange}
+          handleGoldFingersChange={(e) => handleOptValuesChange('goldFingers', e.target.value)}
+          handleEdgeChange={(e) => handleOptValuesChange('edgeGrinding', e.target.value)}
           currentEdgePlating={currentEdgePlating}
           currentViaCovering={currentViaCovering}
           currentFlyingProbeTest={currentFlyingProbeTest}
           edgesVisible={edgesVisible}
-          handleEdgesChange={handleEdgesChange}
+          handleEdgesChange={(e) => handleOptValuesChange('selectedEdges', e.target.value)}
           selectedEdges={selectedData.selectedEdges}
           design={design}
           currentCastellatedHoles={currentCastellatedHoles}
           fingerChamferedVisible={fingerChamferedVisible}
-          handleFingerChamferedChange={handleFingerChamferedChange}
+          handleFingerChamferedChange={(e) => handleOptValuesChange('fingerChamfered', e.target.value)}
           stiffener={stiffener}
           emi={emi}
+          goldFingersThicknessVisible={goldFingersThicknessVisible}
+          selectedConductivity={selectedData.selectedConductivity}
+          selectedVoltage={selectedData.selectedVoltage}
+          handleConductivityChange={(e) => handleOptValuesChange('selectedConductivity', e.target.value)}
+          handleVoltageChange={(e) => handleOptValuesChange('selectedVoltage', e.target.value)}
+          madeSmt={selectedData.madeSmt}
+          handleMadeSmtChange={(e) => handleOptValuesChange('madeSmt', e.target.value)}
         />
         <AdvancesOptions
           toggleAdvancesOptVisibility={toggleAdvancesOptVisibility}
           currentKelvinTest={currentKelvinTest}
           optionsYesNo={optionsYesNo}
-          selectedPackage={selectedData.selectedPackage}
-          selectedSilkscreenTechnology={selectedData.selectedSilkscreenTechnology}
-          selectedKelvinTest={edgeAndCastellatedState.kelvinTest}
-          selectedPaper={edgeAndCastellatedState.paper}
+          // selectedPackage={selectedData.selectedPackage}
+          // selectedSilkscreenTechnology={selectedData.selectedSilkscreenTechnology}
+          selectedKelvinTest={selectedData.kelvinTest}
+          selectedPaper={selectedData.paper}
           selectedAppearanceQuality={selectedData.selectedAppearanceQuality}
-          handleKelvinTestChange={handleKelvinTestChange}
-          handlePaperChange={handlePaperChange}
-          handleAppearanceQualityChange={handleAppearanceQualityChange}
-          handleSilkscreenTechnologyChange={handleSilkscreenTechnologyChange}
-          handlePackageChange={handlePackageChange}
+          handleKelvinTestChange={(e) => handleOptValuesChange('kelvinTest', e.target.value)}
+          handlePaperChange={(e) => handleOptValuesChange('paper', e.target.value)}
+          handleAppearanceQualityChange={(e) => handleOptValuesChange('selectedAppearanceQuality', e.target.value)}
+          // handleSilkscreenTechnologyChange={handleSilkscreenTechnologyChange}
+          // handlePackageChange={handlePackageChange}
           advancesOptVisible={advancesOptVisible}
           currentAppearanceQuality={currentAppearanceQuality}
-          currentSilkscreenTechnology={currentSilkscreenTechnology}
-          packageBox={packageBox}
+          achieveHours={selectedData.achieveHours}
+          handleAchieveHoursChange={(e) => handleOptValuesChange('achieveHours', e.target.value)}
+          hours={hours}
+        // currentSilkscreenTechnology={currentSilkscreenTechnology}
+        // packageBox={packageBox}
         />
         <SideForm
-        saveJsonToFile={saveJsonToFile} />
+          saveJsonToFile={saveJsonToFile} />
       </form>
 
     </div>

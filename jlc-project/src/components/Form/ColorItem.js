@@ -13,15 +13,16 @@ function ColorItem({
       <div className='content'>
         <h2>{title}</h2>
         <div className="color-options">
-          {options.map((value, index) => (
+          {Object.entries(options).map(([key, value], index) => (
             <label key={index} className="color-option-label">
                 
               <span
-                className={`color-option-text ${selectedValue === value ? 'selected' : ''}`}
-                onClick={() => handleOptionClick(value)}
+                className={`color-option-text ${selectedValue === key ? 'selected' : ''}`}
+                onClick={() => handleOptionClick(key)}
               >
-                <div className="color-square" style={{ backgroundColor: value.toLowerCase() }}/>
-                {` ${options[index]}`}
+                <div className="color-square" style={{ backgroundColor: key.toLowerCase() }}/>
+                {/* {` ${options[index]}`} */}
+                {` ${key}`}
               </span>
             </label>
           ))}
