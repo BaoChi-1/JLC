@@ -5,9 +5,11 @@ import SideForm from "./SideForm/SideForm";
 import Specifications from './Specifications';
 import HighOpt from './HighOpt';
 import AdvancesOptions from './AdvancesOptions';
-
+import Header from '../Header/Header'
+import { useTranslation } from 'react-i18next';
 
 function TotalForm() {
+  const { t } = useTranslation();
   const optionsYesNo = {
     'No': false,
     'Yes': true
@@ -18,7 +20,7 @@ function TotalForm() {
     '2 side': [true, 2],
     '3 side': [true, 3],
     '4 side': [true, 4]
-}
+  }
   const baseMaterialImages = {
     'FR-4': 1, 'Flex': 7, 'Aluminum': 2
   };
@@ -73,7 +75,6 @@ function TotalForm() {
   ];
   const materialType = {
     'FR4-Standard TG 135-140': 'TG135',
-    // 'FR4-Standard TG 135-140': 'FR4-Standard TG 140',
     'FR-4 TG155': 'TG155',
     'FR-4 TG170': 'TG170'
   };
@@ -131,7 +132,7 @@ function TotalForm() {
     'Epoxy Filled & Capped': "过孔塞树脂",
     'Copper paste Filled & Capped': '过孔塞铜浆'
   };
-  const boardTolerance = { '±0.2 mm (Regular)': '±0.2 mm (Regular)', '±0.1 mm (Precision)': '±0.2 mm (Regular)' };
+  const boardTolerance = { '±0.2 mm (Regular)': '±0.2 mm (Regular)', '±0.1 mm (Precision)': '±0.1 mm (Precision)' };
   const silkscreen = {
     'White': '白',
     'Black': '黑'
@@ -147,12 +148,15 @@ function TotalForm() {
     'PI:25um/AD:25um': 'PI:25um/AD:25um'
   }
   const hours = {
+    '24 hours (free expediting exclusive for SMT)': 20,
     '24 hours': 18,
-    '24 hours (free expediting exclusive for SMT)':20,
     '12 hours': 12,
-    '48 hours (free expediting)': 48
+    '48 hours (free expediting)': 48,
+    '72 hours (free expediting exclusive for SMT)': 70,
+    '96 hours (4-5 days)': 96,
+    '120 hours (5-6 days)': 120,
   }
-  const [castHoles, setCastHoles]=useState({
+  const [castHoles, setCastHoles] = useState({
     selectedCastellatedHoles: 'No'
   })
   const [inputValues, setInputValues] = useState({
@@ -167,7 +171,7 @@ function TotalForm() {
   const [selectedOption, setSelectedOption] = useState("mm");
   const [selectedData, setSelectedData] = useState({
     produceOrderAccessId: "",
-    addOrderSource: 1,
+    addOrderSource: 4,
     guaranteeService: false,
     impedance: false,
     invoiceType: 11,
@@ -208,7 +212,7 @@ function TotalForm() {
     selectedConductivity: '1W',
     selectedVoltage: '3000W',
     achieveHours: '24 hours',
-    madeSmt: 'Yes',
+    madeSmt: 'No',
     edgeGrinding: "No",
     halfHole: false,
     halfHoleNumber: 0,
@@ -219,7 +223,8 @@ function TotalForm() {
     paper: "No",
     fingerChamfered: "No",
     control: "No",
-    silkscreenStiffener: "No"
+    silkscreenStiffener: "No",
+    madeSteel: "No",
   });
 
   const [currentMaterialType, setCurrentMaterialType] = useState(materialType);
@@ -246,16 +251,16 @@ function TotalForm() {
   const [currentSurface, setCurrentSurface] = useState(surface);
   const [currentNumbers, setCurrentNumbers] = useState(layers);
   const [currentAppearanceQuality, setCurrentAppearanceQuality] = useState(appearanceQuality);
-  const [highOptVisible, setHighOptVisible] = useState(false);
-  const [specificationsVisible, setSpecificationsVisible] = useState(false);
+  const [highOptVisible, setHighOptVisible] = useState(true);
+  const [specificationsVisible, setSpecificationsVisible] = useState(true);
   const [pcbQtyVisible, setPcbQtyVisible] = useState(false);
   const [edgeRailVisible, setEdgeRailVisible] = useState(false);
-  const [advancesOptVisible, setAdvancesOptVisible] = useState(false);
+  const [advancesOptVisible, setAdvancesOptVisible] = useState(true);
   const [panelFormat, setPanelFormat] = useState(false);
   const [inputVisible, setInputVisible] = useState(false);
   const [layerStackupVisible, setLayerStackupVisible] = useState(false);
   const [addOptVisible, setAddOptVisible] = useState(false);
-  const [edgesVisible, setEdgesVisible] = useState(false);
+  // const [edgesVisible, setEdgesVisible] = useState(false);
   const [fingerChamferedVisible, setFingerChamferedVisible] = useState(false);
   const [materialTypeVisible, setMaterialTypeVisible] = useState(false);
   const [cooperTypeVisible, setCooperTypeVisible] = useState(false);
@@ -263,83 +268,11 @@ function TotalForm() {
   const [addOptFRVisible, setAddOptFRVisible] = useState(false);
   const [goldThicknessVisible, setGoldThicknessVisible] = useState(false);
   const [goldFingersThicknessVisible, setGoldFingersThicknessVisible] = useState(false);
-  const [viaVisible, setViaVisible]=useState(false);
-  const [addOptAluminiumVisible, setAddOptAluminiumVisible]= useState(false)
-
+  const [viaVisible, setViaVisible] = useState(false);
+  const [addOptAluminiumVisible, setAddOptAluminiumVisible] = useState(false);
+  const [currentHours, setCurrentHours] = useState(hours);
+  const [inputValue, setInputValue] = useState('');
   useEffect(() => {
-
-    // const serverData = {
-    //   "produceOrderAccessId": "",
-    //   "achieveHours": 48,
-    //   "adornColor": "绿",
-    //   "adornPut": "有铅喷锡",
-    //   "adornBestrow": "过孔盖油",
-    //   "cascadeStructure": null,
-    //   "impedanceLaminatedConstructionDto": null,
-    //   "halfHole": false,
-    //   "madeSmt": false,
-    //   "impedance": false,
-    //   "confirmProductionFile": "",
-    //   "confirmProductionFileType": null,
-    //   "cuprumThickness": 1,
-    //   "insideCuprumThickness": 0.5,
-    //   "halfHoleNumber": 0,
-    //   "isNeedBook": "no",
-    //   "isNewOrder": "yes",
-    //   "specifyBoard": false,
-    //   "specifyBoardName": "无要求",
-    //   "specifyBoardCode": "无要求",
-    //   "invoiceType": 99,
-    //   "orderType": 1,
-    //   "printHDChar": false,
-    //   "sestencilCountX": null,
-    //   "sestencilCountY": null,
-    //   "testProduct": 2,
-    //   "addOrderSource": 4,
-    //   "collarCouponNo": "",
-    //   "deviceId": null,
-    //   "pcHelperDeviceInfoType": null,
-    //   "receivePhone": "",
-    //   "isBackOrder": "no",
-    //   "isStencilType": "no",
-    //   "historyStencilType": null,
-    //   "historyStencilCounts": 5,
-    //   "historyStencilLength": "11",
-    //   "historyStencilstencilWidth": "11",
-    //   "edgeGrinding": false,
-    //   "lowResistanceTest": false,
-    //   "isMakeup": null,
-    //   "tgBoardLevel": "TG135",
-    //   "guaranteeService": false,
-    //   "guaranteeCount": null,
-    //   "guaranteeUnitPrice": null,
-    //   "timeStamp": "0.6595454801328777",
-    //   "rimCutMoney": null,
-    //   "uploadFileAfterProcess": true,
-    //   "plateType": 1,
-    //   "serviceMoneyId": [
-    //     806200,
-    //     806206,
-    //     806213,
-    //     806218,
-    //     806225,
-    //     806239,
-    //     806247,
-    //     806251,
-    //     806259,
-    //     806121,
-    //     806086,
-    //     806092,
-    //     806210,
-    //     806263
-    //   ],
-    //   "filePreverifyUUID": null,
-    //   "collarCouponVo": null,
-    //   "printMethod": "",
-    //   "intialMadeSmtFlag": false,
-    //   "madeSteel": false
-    // }
-
     if (stencilCounts < 50) {
       const updatedOptionsTest = Object.fromEntries(
         Object.entries(flyingProbeTest).slice(0, 1)
@@ -383,7 +316,7 @@ function TotalForm() {
     }
     else {
       setCurrentDelivery(deliveryOpt);
-      
+
       if (selectedData.selectedDelivery === 'Panel By JLCPCB') {
         setCurrentDesign(design.slice(0, 1));
         setInputVisible(false);
@@ -436,6 +369,29 @@ function TotalForm() {
       }
 
       if (selectedData.stencilLayer == 2) {
+        if (selectedData.madeSmt === 'Yes') {
+          const updatedOptionsHours = Object.fromEntries(
+            Object.entries(hours).slice(0, 1)
+          );
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "24 hours (free expediting exclusive for SMT)",
+          }));
+        } else {
+          const updatedOptionsHours = Object.fromEntries(
+            Object.entries(hours).slice(1, 4)
+          );
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "24 hours",
+          }));
+        }
+        const updatedOptionsMaterialType = Object.fromEntries(
+          Object.entries(materialType).slice(0, 1)
+        );
+        setCurrentMaterialType(updatedOptionsMaterialType);
         const updatedOptionsYesNo = Object.fromEntries(
           Object.entries(optionsYesNo).slice(0, 1)
         );
@@ -458,7 +414,7 @@ function TotalForm() {
         else if (selectedData.adornColor === "White") {
           const updatedOptionsSilkscreen = Object.fromEntries(
             Object.entries(silkscreen).slice(1)
-            
+
           );
           // setCurrentOz(oz);
           setCurrentColorSilkScreen(updatedOptionsSilkscreen);
@@ -478,15 +434,38 @@ function TotalForm() {
           const updatedOptionsLayers = Object.fromEntries(
             Object.entries(layers).slice(1)
           );
-          setEdgesVisible(true);
+          // setEdgesVisible(true);
           setCurrentNumbers(updatedOptionsLayers);
         }
         else {
-          setEdgesVisible(false);
+          // setEdgesVisible(false);
           setCurrentNumbers(layers);
         }
       }
       if (selectedData.stencilLayer == 1) {
+        if (selectedData.madeSmt === 'Yes') {
+          const updatedOptionsHours = Object.fromEntries(
+            Object.entries(hours).slice(0, 1)
+          );
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "24 hours (free expediting exclusive for SMT)",
+          }));
+        } else {
+          const updatedOptionsHours = Object.fromEntries(
+            Object.entries(hours).slice(3, 4)
+          );
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "24 hours",
+          }));
+        }
+        const updatedOptionsMaterialType = Object.fromEntries(
+          Object.entries(materialType).slice(0, 1)
+        );
+        setCurrentMaterialType(updatedOptionsMaterialType);
         console.log(selectedData.stencilLayer, typeof selectedData.stencilLayer);
         const updatedOptions = Object.fromEntries(
           Object.entries(optionsYesNo).slice(0, 1)
@@ -534,6 +513,28 @@ function TotalForm() {
 
       }
       else if (selectedData.stencilLayer == 4) {
+        if (selectedData.madeSmt === 'Yes') {
+          const updatedOptionsHours = Object.fromEntries(
+            Object.entries(hours).slice(4, 5)
+          );
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "72 hours (free expediting exclusive for SMT)",
+          }));
+        } else {
+          const updatedOptionsHours = {
+            '48 hours (free expediting)': 48,
+            '72 hours': 65,
+            '24 hours': 24,
+            'Normally 3-4 days': 72,
+          }
+          setCurrentHours(updatedOptionsHours)
+          setSelectedData((prevData) => ({
+            ...prevData,
+            achieveHours: "24 hours",
+          }));
+        }
         const updatedOptionsThickness = Object.fromEntries(
           Object.entries(thickness).slice(2)
         );
@@ -603,6 +604,27 @@ function TotalForm() {
         }));
 
         if (selectedData.stencilLayer == 6) {
+          if (selectedData.madeSmt === 'Yes') {
+            const updatedOptionsHours = {
+              '72 hours (free expediting exclusive for SMT)': 48,
+            }
+            setCurrentHours(updatedOptionsHours);
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: "72 hours (free expediting exclusive for SMT)",
+            }));
+          } else {
+            const updatedOptionsHours = {
+              '72 hours': 72,
+              '96 hours': 96,
+              'Normally 5-6 days': 120
+            }
+            setCurrentHours(updatedOptionsHours);
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: "Normally 5-6 days",
+            }));
+          }
           const updatedOptionsMaterialType = Object.fromEntries(
             Object.entries(materialType).slice(0, 2)
           );
@@ -647,8 +669,90 @@ function TotalForm() {
           }));
           // setCurrentOz(oz.slice(0, 1));
           setCurrentOz2(updatedOptionsOz2);
+          if (selectedData.stencilLayer == 8) {
+            const updatedOptionsHours = {
+              'Normally 6-7 days': 144,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 6-7 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 10) {
+            const updatedOptionsHours = {
+              'Normally 7-8 days': 168,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 7-8 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 12) {
+            const updatedOptionsHours = {
+              'Normally 8-9 days': 192,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 8-9 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 14) {
+            const updatedOptionsHours = {
+              'Normally 9-10 days': 216,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 9-10 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 16) {
+            const updatedOptionsHours = {
+              'Normally 10-11 days': 240,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 10-11 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 18) {
+            const updatedOptionsHours = {
+              'Normally 11-12 days': 264,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 11-12 days',
+            }));
+
+          } else if (selectedData.stencilLayer == 20) {
+            const updatedOptionsHours = {
+              'Normally 12-13 days': 288,
+            }
+            setCurrentHours(updatedOptionsHours)
+            setSelectedData((prevData) => ({
+              ...prevData,
+              achieveHours: 'Normally 12-13 days',
+            }));
+
+          }
           if (selectedData.stencilLayer == 10 || selectedData.stencilLayer == 12 || selectedData.stencilLayer == 14
             || selectedData.stencilLayer == 16 || selectedData.stencilLayer == 18 || selectedData.stencilLayer == 20) {
+            if (selectedData.stencilLayer == 10) {
+              const updatedOptionsHours = {
+                '72 hours (free expediting exclusive for SMT)': 168,
+              }
+              setCurrentHours(updatedOptionsHours)
+              setSelectedData((prevData) => ({
+                ...prevData,
+                achieveHours: "72 hours (free expediting exclusive for SMT)",
+              }));
+
+            }
             const updatedOptionsThickness = Object.fromEntries(
               Object.entries(thickness).slice(3)
             );
@@ -662,6 +766,17 @@ function TotalForm() {
               tgBoardLevel: "FR-4 TG170",
             }));
             if (selectedData.stencilLayer == 12) {
+              if (selectedData.stencilLayer == 8) {
+                const updatedOptionsHours = {
+                  '72 hours (free expediting exclusive for SMT)': 144,
+                }
+                setCurrentHours(updatedOptionsHours)
+                setSelectedData((prevData) => ({
+                  ...prevData,
+                  achieveHours: "72 hours (free expediting exclusive for SMT)",
+                }));
+
+              }
               const filteredThickness = {
                 '1.2': thickness['1.2'],
                 '1.6': thickness['1.6'],
@@ -706,18 +821,25 @@ function TotalForm() {
       }
 
     } else if (selectedData.plateType === "Aluminum") {
+      const updatedOptionsHours = {
+        'Normally 3 days': 72,
+      }
+      setCurrentHours(updatedOptionsHours)
+      setSelectedData((prevData) => ({
+        ...prevData,
+        achieveHours: 'Normally 3 days',
+      }));
       setAddOptAluminiumVisible(true)
       // const updatedOptionsLayers = Object.fromEntries(
       //   Object.entries(layers).slice(0, 1)
       // );
-      
       setMaterialTypeVisible(false)
       setViaVisible(false);
       setAddOptFRVisible(true)
       setAddOptFlexVisible(false)
       const filteredLayers = {
         '1': layers['1'],
-      };      
+      };
       setCurrentNumbers(filteredLayers);
       setSelectedData((prevData) => ({
         ...prevData,
@@ -729,7 +851,7 @@ function TotalForm() {
       setCurrentThickness(updatedOptionsThickness);
       setSelectedData((prevData) => ({
         ...prevData,
-        stencilLayer: "1.6",
+        stencilPly: "1.6",
       }));
       const filteredColor = Object.fromEntries(
         Object.entries(color).filter(([key, value]) => key === 'White' || key === "Black")
@@ -740,20 +862,20 @@ function TotalForm() {
         adornColor: "White",
       }));
       const updatedOptionsSurface = Object.fromEntries(
-        Object.entries(surface).slice(0,2)
+        Object.entries(surface).slice(0, 2)
       );
       setCurrentSurface(updatedOptionsSurface);
       setSelectedData((prevData) => ({
         ...prevData,
         selectedSurface: 'HASL(with lead)',
       }));
-setCurrentFlyingProbeTest(flyingProbeTest);
+      setCurrentFlyingProbeTest(flyingProbeTest);
       setSelectedData((prevData) => ({
         ...prevData,
         selectedFlyingProbeTest: "Fully Test",
       }));
       const filteredGoldFingers = Object.fromEntries(
-        Object.entries(goldThickness).slice(0,1)
+        Object.entries(goldThickness).slice(0, 1)
       );
       setCurrentGoldThickness(filteredGoldFingers);
       setSelectedData((prevData) => ({
@@ -761,7 +883,7 @@ setCurrentFlyingProbeTest(flyingProbeTest);
         selectedGoldThickness: 'No',
       }));
       const filteredCastellated = Object.fromEntries(
-        Object.entries(castellatedHoles).slice(0,1)
+        Object.entries(castellatedHoles).slice(0, 1)
       );
       setCurrentCastellatedHoles(filteredCastellated);
       setSelectedData((prevData) => ({
@@ -795,10 +917,20 @@ setCurrentFlyingProbeTest(flyingProbeTest);
     selectedData.plateType, selectedData.stencilLayer, selectedData.stencilNumber, selectedData.selectedDelivery,
     selectedData.adornColor, selectedData.halfHole, selectedData.goldFingers, stencilCounts,
     selectedData.selectedSurface, selectedData.selectedProductType, selectedData.control, selectedData.selectedMinVia,
-    selectedData.stencilPly, inputValues.design, selectedData.selectedStiffener
+    selectedData.stencilPly, inputValues.design, selectedData.selectedStiffener, selectedData.madeSmt
   ]);
   useEffect(() => {
     if (selectedData.plateType === "Flex") {
+      const updatedOptionsHours = {
+        '48 hours (free expediting)': 48,
+        '72 hours': 72,
+        'Normally 4-5 days': 96,
+      }
+      setCurrentHours(updatedOptionsHours)
+      setSelectedData((prevData) => ({
+        ...prevData,
+        achieveHours: "Normally 4-5 days",
+      }));
       setAddOptAluminiumVisible(false)
       console.log("selectedData.selectedStiffener:", selectedData.selectedStiffener);
       if (selectedData.selectedStiffener === 'Polyimide') {
@@ -925,21 +1057,21 @@ setCurrentFlyingProbeTest(flyingProbeTest);
 
   const handleCastellatedHolesChange = (field, value) => {
     const [halfHole, halfHoleNumber] = castellatedHoles[value];
-  
+
     setSelectedData(prevData => ({
       ...prevData,
       halfHole: halfHole,
       halfHoleNumber: halfHoleNumber
     }));
-  
+
     setCastHoles({
       ...castHoles,
       [field]: value,
     });
-  
+
     console.log(halfHole, halfHoleNumber);
   };
-  
+
 
   const handleEnterKeyPress = () => {
     if (inputValues.stencilNumber > 1) {
@@ -960,17 +1092,43 @@ setCurrentFlyingProbeTest(flyingProbeTest);
     }));
     setPcbQtyVisible(false);
   };
- 
+  const [errors, setErrors] = useState({
+    stencilLength: null,
+    stencilWidth: null,
+    column: null,
+    row: null,
+    stencilNumber: null,
+    goldFingersThickness: null
+  });
   const handleInputValuesChange = (field, value) => {
-    setInputValues({
-      ...inputValues,
-      [field]: value,
+    setInputValues(prevInputValues => {
+      const newInputValues = {
+        ...prevInputValues,
+        [field]: !isNaN(value) ? Number(value) : prevInputValues[field]
+      };
+      if (field === 'column' || field === 'row') {
+        if (isNaN(value)) {
+          setErrors({ ...errors, [field]: `Значение для поля ${field} должно быть числом.` });
+        } else if (field === 'column' && Number(value) < newInputValues.row) {
+          setErrors({ ...errors, column: `Значение столбца должно быть больше или равно значению строки.` });
+        } else {
+          setErrors({ ...errors, [field]: null });
+        }
+      } else {
+        if (isNaN(value)) {
+          setErrors({ ...errors, [field]: `Значение для поля ${field} должно быть числом.` });
+        } else {
+          setErrors({ ...errors, [field]: null });
+        }
+      }
+      return newInputValues;
     });
   };
-  const handleOptValuesChange=(field,value)=>{
+
+  const handleOptValuesChange = (field, value) => {
     setSelectedData({
       ...selectedData,
-      [field]:value,
+      [field]: value,
     })
   }
   const handleOptionChange = (e) => {
@@ -978,55 +1136,56 @@ setCurrentFlyingProbeTest(flyingProbeTest);
   };
 
   const saveJsonToFile = () => {
-     const {
-        produceOrderAccessId,
-        addOrderSource,
-        guaranteeService,
-        impedance,
-        invoiceType,
-        orderType,
-        printHDChar,
-        stencilLayer,
-        plateType,
-        stencilNumber,
-        adornColor,
-        stencilPly,
-        adornBestrow,
-        tgBoardLevel,
-        achieveHours,
-        madeSmt,
-        edgeGrinding,
-        halfHole,
-        halfHoleNumber
+    const {
+      produceOrderAccessId,
+      addOrderSource,
+      guaranteeService,
+      impedance,
+      invoiceType,
+      orderType,
+      printHDChar,
+      stencilLayer,
+      plateType,
+      stencilNumber,
+      adornColor,
+      stencilPly,
+      adornBestrow,
+      tgBoardLevel,
+      achieveHours,
+      madeSmt,
+      edgeGrinding,
+      halfHole,
+      halfHoleNumber,
+      madeSteel
     } = selectedData;
     const finalData = {
       produceOrderAccessId,
-        addOrderSource,
-        guaranteeService,
-        impedance,
-        invoiceType,
-        orderType,
-        printHDChar,
-        stencilLayer: stencilLayer.toString(),
-        plateType: baseMaterialImages[plateType],
-        stencilNumber,
-        adornColor: color[adornColor],
-        stencilPly: stencilPly.toString(),
-        adornBestrow: viaCovering[adornBestrow] ,
-        tgBoardLevel: materialType[tgBoardLevel],
-        achieveHours:hours[achieveHours],
-        madeSmt: optionsYesNo[madeSmt],
-        edgeGrinding: optionsYesNo[edgeGrinding],
-        halfHole,
-        halfHoleNumber,
+      addOrderSource,
+      guaranteeService,
+      impedance,
+      invoiceType,
+      orderType,
+      printHDChar,
+      stencilLayer: stencilLayer.toString(),
+      plateType: baseMaterialImages[plateType],
+      stencilNumber,
+      adornColor: color[adornColor],
+      stencilPly: stencilPly.toString(),
+      adornBestrow: viaCovering[adornBestrow],
+      tgBoardLevel: materialType[tgBoardLevel],
+      achieveHours: hours[achieveHours],
+      madeSmt: optionsYesNo[madeSmt],
+      edgeGrinding: optionsYesNo[edgeGrinding],
+      halfHole,
+      halfHoleNumber,
+      madeSteel: optionsYesNo[madeSteel],
       ...inputValues,
-      
     };
     if (inputValues.stencilNumber !== null) {
       finalData.stencilNumber = parseInt(inputValues.stencilNumber);
-  } else {
+    } else {
       finalData.stencilNumber = parseInt(selectedData.stencilNumber);
-  }
+    }
     const jsonData = JSON.stringify(finalData, null, 2);
     const blob = new Blob([jsonData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -1056,6 +1215,8 @@ setCurrentFlyingProbeTest(flyingProbeTest);
   };
   return (
     <div>
+      <Header></Header>
+
       <form className="form" onSubmit={handleSubmit}>
         <ModalForm
           stencilCounts={stencilCounts}
@@ -1080,6 +1241,9 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           handlePCBQtyValue={handlePCBQtyValue}
           selectedPcbQty={selectedData.selectedPcbQty}
           currentNumbers={currentNumbers}
+          errorLength={errors.stencilLength}
+          errorWidth={errors.stencilWidth}
+
 
         />
         <Specifications
@@ -1115,7 +1279,7 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           inputVisible={inputVisible}
           panelFormat={panelFormat}
           edgeRails={edgeRails}
-          handleEdgesRailsChange={(e) => handleOptValuesChange('selectedEdgesRails', e.target.value)}
+          handleEdgesRailsChange={(e) => handleOptValuesChange('selectedEdgeRail', e.target.value)}
           selectedEdgeRail={selectedData.selectedEdgeRail}
           edgeRailVisible={edgeRailVisible}
           currentColorSilkScreen={currentColorSilkScreen}
@@ -1128,6 +1292,10 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           selectedCooperType={selectedData.selectedCooperType}
           currentCooperType={currentCooperType}
           handleCooperTypeChange={(e) => handleOptValuesChange('selectedCooperType', e.target.value)}
+          errorNumber={errors.stencilNumber}
+          errorRow={errors.row}
+          errorColumn={errors.column}
+
         />
         <HighOpt
           addOptFRVisible={addOptFRVisible}
@@ -1204,7 +1372,7 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           currentEdgePlating={currentEdgePlating}
           currentViaCovering={currentViaCovering}
           currentFlyingProbeTest={currentFlyingProbeTest}
-          edgesVisible={edgesVisible}
+          // edgesVisible={edgesVisible}
           handleEdgesChange={(e) => handleOptValuesChange('selectedEdges', e.target.value)}
           selectedEdges={selectedData.selectedEdges}
           design={design}
@@ -1220,6 +1388,9 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           handleVoltageChange={(e) => handleOptValuesChange('selectedVoltage', e.target.value)}
           madeSmt={selectedData.madeSmt}
           handleMadeSmtChange={(e) => handleOptValuesChange('madeSmt', e.target.value)}
+          steelMesh={selectedData.madeSteel}
+          handleSteelMeshChange={(e) => handleOptValuesChange('madeSteel', e.target.value)}
+          errorGoldFingersThickness={errors.goldFingersThickness}
         />
         <AdvancesOptions
           toggleAdvancesOptVisibility={toggleAdvancesOptVisibility}
@@ -1239,10 +1410,19 @@ setCurrentFlyingProbeTest(flyingProbeTest);
           currentAppearanceQuality={currentAppearanceQuality}
           achieveHours={selectedData.achieveHours}
           handleAchieveHoursChange={(e) => handleOptValuesChange('achieveHours', e.target.value)}
-          hours={hours}
+          currentHours={currentHours}
         // currentSilkscreenTechnology={currentSilkscreenTechnology}
         // packageBox={packageBox}
         />
+        <div>
+          <h2>{t('notes')}</h2>
+          <textarea
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder=""
+          />
+        </div>
         <SideForm
           saveJsonToFile={saveJsonToFile} />
       </form>

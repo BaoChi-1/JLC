@@ -32,15 +32,15 @@ input[type="radio"] {
 }
 
 .custom-checkbox-label.selected {
-  border: 2px solid #007bff; /* Цвет выделения */
+  border: 2px solid #f8b45c;
 }
 
 .custom-checkbox-label input {
-  display: none; /* Скрыть фактический чекбокс */
+  display: none;
 }
 
 .custom-checkbox-label input:checked + .custom-checkbox-text {
-  font-weight: bold; /* Начертание шрифта для выделенного элемента */
+  font-weight: bold;
 }
 .custom-checkbox-text{
   cursor: pointer;
@@ -63,7 +63,7 @@ input[type="radio"] {
 }
 
 .custom-radio-text.selected,.color-option-text.selected{
-  background-color: #d3defc;
+  background-color: #f8b45c;
 }
 
 .custom-radio-image {
@@ -74,9 +74,17 @@ input[type="radio"] {
   width: 150px;
   height: 100px;
 }
-
+textarea{
+  min-width: 30vi;
+    border-radius: 10px;
+    padding: 5px 10px;
+    min-height: 5vi;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+    5px 5px 5px rgba(0, 0, 0, 0.05),
+    3px 3px 5px  rgba(0, 0, 0, 0.05);
+}
 .custom-radio-image.selected {
-  border-color: #007bff;
+  border-color: #f8b45c;
 }
 
 .choicePcbQty {
@@ -130,7 +138,7 @@ input[type="radio"] {
   border-radius: 10px;
   flex-wrap: wrap;
   max-width: 65%;
-  border:double rgb(137, 184, 255);
+  border:double rgb(37, 37, 37);
   margin: 0 auto;
 }
 .content {
@@ -185,7 +193,7 @@ input[type="radio"] {
 .sub{
   border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: #55a7ff;
+  background-color: #f8b45c;
   padding: 5px 10px;
 }
 .color-square {
@@ -222,4 +230,26 @@ input[type="radio"] {
   display: inline-block;
   margin-right: .5vi;
   margin-top: .5vi;
+}
+.language-switch {
+  display: flex;
+}
+
+.language-button {
+  background-color:  #f8b45c;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 1vi 1vi;
+  display: inline-block;
+  font-size: 1vi;
+  cursor: pointer;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+}
+
+.language-button:hover {
+  background-color: #e0884d;
 }

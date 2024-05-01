@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 function Item({
     options,
     selectedValue,
     handleChange,
     title
   }) {
+    const {t}= useTranslation();
+
     const handleOptionClick = (value) => {
       handleChange({ target: { value } });
       console.log(`Selected ${title}: ${value}`);
@@ -19,7 +22,7 @@ function Item({
                 className={`custom-radio-text ${selectedValue === key ? 'selected' : ''}`}
                 onClick={() => handleOptionClick(key)}
               >
-                {` ${key}`}
+                {t(key)}
               </span>
             </label>
           ))}

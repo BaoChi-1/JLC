@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 function ItemCheckBox({
     options,
@@ -6,25 +7,19 @@ function ItemCheckBox({
     handleChange,
     title
 }) {
+    const {t}= useTranslation();
     const handleOptionClick = (key) => {
         let updatedValue = { ...selectedValue };
-
         if (key === 'Without') {
-            // Если выбран "Without", сбрасываем все остальные выборы
             for (const optionKey in updatedValue) {
-                updatedValue[optionKey] = false;
-            }
+                updatedValue[optionKey] = false;            }
         } else if (key !== 'Without' && selectedValue['Without']) {
-            // Если выбран другой элемент и "Without" был выбран, сбрасываем "Without"
             updatedValue = { ...updatedValue, 'Without': false };
         }
-
         updatedValue = { ...updatedValue, [key]: !updatedValue[key] };
         handleChange({ target: { value: updatedValue } });
     };
-
     useEffect(() => {
-        // Устанавливаем начальное значение в соответствии с selectedStiffener
         handleOptionClick(selectedValue);
     }, []);
 
@@ -40,7 +35,7 @@ function ItemCheckBox({
                             onChange={() => handleOptionClick(key)}
                         />
                         <span className="custom-checkbox-text">
-                            {key}
+                        {t(key)}
                         </span>
                     </label>
                 ))}

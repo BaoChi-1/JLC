@@ -2,6 +2,7 @@ import React from 'react';
 import ColorItem from './ColorItem';
 import FormVisibility from './FormVisibility';
 import Item from './Item';
+import { useTranslation } from 'react-i18next';
 function Specifications({
   currentDelivery,
   selectedDelivery,
@@ -47,18 +48,24 @@ handleMaterialTypeChange,
 cooperTypeVisible,
 selectedCooperType,
 currentCooperType,
-handleCooperTypeChange
+handleCooperTypeChange,
+errorNumber,
+errorRow,
+errorColumn
 }) {
+  const {t}= useTranslation();
+
   return (
     <div className="specifications">
       <FormVisibility
-        title="PCB Specifications"
+        title={t('spec')}
         toggle={toggleSpecificationsVisibility}
       />
       {specificationsVisible && (
         <div>
           <div className='content'>
-            <h2>Different Design</h2>
+            <h2>{t('design')}</h2>
+            {errorNumber && <div style={{ color: 'red' }}>{errorNumber}</div>}
             <div className="flex items-center">
               <div className="radio-btn">
                 {currentDesign.map((value, index) => (
@@ -88,63 +95,62 @@ handleCooperTypeChange
                   />
                 </div>
               )}
-
-
             </div>
-
           </div>
           <Item
-            title="Delivery Format"
+            title={t('delivery')}
             options={currentDelivery}
             selectedValue={selectedDelivery}
             handleChange={handleDeliveryChange}
           />
           {panelFormat && (
             <div className='panel'>
-              <h2>Panel Format</h2>
+              <h2>{t('panel')}</h2>
+              {errorRow && <div style={{ color: 'red' }}>{errorRow}</div>}
               <input
                 type="text"
                 value={inputValuesRow}
                 onChange={handleInputRowChange}
               />
-              *
+              *              
               <input
                 type="text"
                 value={inputValuesColumn}
                 onChange={handleInputColumnChange}
               />
+              {errorColumn && <div style={{ color: 'red' }}>{errorColumn}</div>}
             </div>
           )}
           {edgeRailVisible && (
             <Item
-              title="Edge Rails"
+              title={t('edgeRails')}
               options={edgeRails}
               selectedValue={selectedEdgeRail}
               handleChange={handleEdgesRailsChange}
             />
           )}
           <Item
-            title="PCB Thickness"
+            title={t('pcbThickness')}
             options={currentThickness}
             selectedValue={stencilPly}
             handleChange={handleThicknessChange}
           />
 
           <ColorItem
-            title="PCB Color"
+            title={t('color')}
             options={currentColor}
             selectedValue={adornColor}
             handleChange={handleColorChange}
           />
           <ColorItem
-            title="Silkscreen"
+            title={t('silkscreen')}
             options={currentColorSilkScreen}
             selectedValue={selectedSilkscreen}
             handleChange={handleSilkscreenChange}
           />
           {cooperTypeVisible&&(
               <Item
-            title="Cooper Type"
+            title={t('cooperType')}
             options={currentCooperType}
             selectedValue={selectedCooperType}
             handleChange={handleCooperTypeChange}
@@ -152,21 +158,21 @@ handleCooperTypeChange
           )}
           {materialTypeVisible && (
             <Item
-            title="Material Type"
+            title={t('materialType')}
             options={currentMaterialType}
             selectedValue={selectedMaterialType}
             handleChange={handleMaterialTypeChange}
           />
           )}
           <Item
-            title="Surface Finish"
+            title={t('surfaceFinish')}
             options={currentSurface}
             selectedValue={selectedSurface}
             handleChange={handleSurfaceChange}
           />
           {goldThicknessVisible && (
               <Item
-                title="Gold Thickness"
+                title={t('goldThickness')}
                 options={currentGoldThickness}
                 selectedValue={selectedGoldThickness}
                 handleChange={handleGoldThicknessChange}

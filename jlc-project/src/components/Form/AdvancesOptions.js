@@ -1,6 +1,8 @@
 import React from "react";
 import FormVisibility from "./FormVisibility";
 import Item from "./Item";
+import { useTranslation } from 'react-i18next';
+
 function AdvancesOptions({
   toggleAdvancesOptVisibility,
   optionsYesNo,
@@ -21,38 +23,38 @@ function AdvancesOptions({
   currentKelvinTest,
   achieveHours,
 handleAchieveHoursChange,
-hours
+currentHours
 }) {
-
+  const {t}= useTranslation();
   return (
     <div >
       <FormVisibility
-        title="Advanced Options"
+        title= {t('advancedOptions')}
         toggle={toggleAdvancesOptVisibility}
       />
       {advancesOptVisible && (
         <div>
           <Item
-            title="4-Wire Kelvin Test"
+            title={t('kelvinTest')}
             options={currentKelvinTest}
             selectedValue={selectedKelvinTest}
             handleChange={handleKelvinTestChange}
           />
           <Item
-            title="Paper between PCBs"
+            title={t('paper')}
             options={optionsYesNo}
             selectedValue={selectedPaper}
             handleChange={handlePaperChange}
           />          
           <Item
-            title="Appearance Quality"
+            title={t('appearanceQuality')}
             options={currentAppearanceQuality}
             selectedValue={selectedAppearanceQuality}
             handleChange={handleAppearanceQualityChange}
           />
           <Item
-            title="Select delivery date"
-            options={hours}
+            title={t('deliveryDate')}
+            options={currentHours}
             selectedValue={achieveHours}
             handleChange={handleAchieveHoursChange}
           />

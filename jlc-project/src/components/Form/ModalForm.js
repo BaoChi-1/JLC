@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Item from './Item';
 function ModalForm({
   selectedOption,
@@ -20,10 +21,12 @@ function ModalForm({
   setPcbQtyVisible,
   stencilCounts,
   handlePCBQtyValue,
-  stencilCountsOptions
+  stencilCountsOptions,
+  errorLength,
+  errorWidth
 }) {
   const [isInitialRender, setIsInitialRender] = useState(true);
-
+  const {t}= useTranslation();
   useEffect(() => {
     if (isInitialRender) {
       handlePCBQtyValue(5);
@@ -35,7 +38,7 @@ function ModalForm({
     <div>
       
         <div className='content image-options'>
-          <h2>Base Material</h2>
+          <h2>{t('base')}</h2>
           <div className='base-material'>
             {Object.entries(baseMaterialImages).map(([key, value], index) => (
               <label key={index} className="custom-radio-label">
@@ -46,7 +49,7 @@ function ModalForm({
                   onClick={() => handleImageChange({ target: { value: key } })}
                 />
                 <div className={`custom-radio-text ${plateType === key ? 'selected' : ''}`}>
-                  {`${key}`}
+                {t(key)}
                 </div>
               </label>
             ))}
@@ -54,15 +57,16 @@ function ModalForm({
         </div>
         
         <Item
-        title="Layers"
+        title={t('layers')}
         options={currentNumbers}
         selectedValue={stencilLayer}
         handleChange={handleNumberChange}
       />
 
         <div className='dimen-opt'>
-          <h2>Dimensions</h2>
-          <input
+          <h2>{t('dimension')}</h2>
+      {errorLength && <div style={{ color: 'red' }}>{errorLength}</div>}
+      <input
             type="text"
             value={inputValuesstencilWidth}
             onChange={handleInputstencilWidthChange}
@@ -73,6 +77,7 @@ function ModalForm({
             value={inputValuesstencilLength}
             onChange={handleInputstencilLengthChange}
           />
+          {errorWidth && <div style={{ color: 'red' }}>{errorWidth}</div>}
           <select value={selectedOption} onChange={handleOptionChange}>
             <option value="mm">mm</option>
             <option value="sm">sm</option>
@@ -81,7 +86,7 @@ function ModalForm({
 
 
         <div>
-          <h2>PCB Qty</h2>
+          <h2>{t('pcbQTY')}</h2>
           <div className="custom-radio-text" onClick={() => setPcbQtyVisible(true)}>
             <span>{stencilCounts}</span>
           </div>

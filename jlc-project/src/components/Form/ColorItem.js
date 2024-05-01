@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 function ColorItem({
     options,
     selectedValue,
     handleChange,
     title
   }) {
+    const {t}= useTranslation();
+
     const handleOptionClick = (value) => {
       handleChange({ target: { value } });
       console.log(`Selected ${title}: ${value}`);
@@ -21,8 +24,7 @@ function ColorItem({
                 onClick={() => handleOptionClick(key)}
               >
                 <div className="color-square" style={{ backgroundColor: key.toLowerCase() }}/>
-                {/* {` ${options[index]}`} */}
-                {` ${key}`}
+                {t(key)}
               </span>
             </label>
           ))}

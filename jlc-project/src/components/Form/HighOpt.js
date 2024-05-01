@@ -2,6 +2,8 @@ import React from 'react';
 import FormVisibility from './FormVisibility';
 import Item from './Item';
 import ItemCheckBox from './ItemCheckBox';
+import { useTranslation } from 'react-i18next';
+
 function HighOpt({
   handleEdgesChange,
   selectedEdges,
@@ -94,11 +96,16 @@ handleConductivityChange,
 handleVoltageChange,
  madeSmt,
 handleMadeSmtChange,
+steelMesh,
+handleSteelMeshChange,
+errorGoldFingersThickness
 }) {
+
+const {t}= useTranslation();
   return (
     <div className="high-opt">
       <FormVisibility
-        title="High-spec Options"
+        title={t('highOptions')}
         toggle={toggleHighOptVisibility}
       />
       {highOptVisible && (
@@ -112,20 +119,20 @@ handleMadeSmtChange,
           {addOptFlexVisible && (
             <div>
               <Item
-                title="Coverlay Thickness"
+                title={t('coverlay')}
                 options={currentCoverlayThickness}
                 selectedValue={selectedCoverlayThickness}
                 handleChange={handleCoverlayThicknessChange}
               />
               <ItemCheckBox
-                title="Stiffener"
+                title={t('stiffener')}
                 options={stiffener}
                 selectedValue={selectedStiffener}
                 handleChange={handleStiffenerChange}
               />
               {polyimideThicknessVisible || Object.keys(selectedStiffener).some(key => key !== 'Without' && selectedStiffener['Polyimide']) && (
                 <Item
-                  title="Polyimide Thickness"
+                  title={t('polyimide')}
                   options={polyimideThickness}
                   selectedValue={selectedPolyimide}
                   handleChange={handlePolyimideChange}
@@ -134,7 +141,7 @@ handleMadeSmtChange,
 
               {fr4ThicknessVisible || Object.keys(selectedStiffener).some(key => key !== 'Without' && selectedStiffener['FR4']) && (
                 <Item
-                  title="FR4 Thickness"
+                  title={t('FR4')}
                   options={fr4Thickness}
                   selectedValue={selectedFR4}
                   handleChange={handleFR4Change}
@@ -142,7 +149,7 @@ handleMadeSmtChange,
               )}
               {stainlessSteelThicknessVisible || Object.keys(selectedStiffener).some(key => key !== 'Without' && selectedStiffener['Stainless Steel']) && (
                   <Item
-                  title="Stainless Steel Thickness"
+                  title={t('stainlessSteel')}
                   options={stainlessSteelThickness}
                   selectedValue={selectedstainless}
                   handleChange={handleStainlessChange}
@@ -151,26 +158,26 @@ handleMadeSmtChange,
               }
               {tapeThicknessVisible || Object.keys(selectedStiffener).some(key => key !== 'Without' && selectedStiffener['3M Tape']) && (
                 <Item
-                  title="3M Tape Thickness"
+                  title={t('3MTape')}
                   options={tapeThickness}
                   selectedValue={selectedTape}
                   handleChange={handleTapeChange}
                 />
               )}
               <Item
-                title="EMI Shielding Film"
+                title={t('EMI')}
                 options={emi}
                 selectedValue={selectedEmi}
                 handleChange={handleEmiChange}
               />
               <Item
-                title="Cutting Method"
+                title={t('cuttingMethod')}
                 options={cuttingMethod}
                 selectedValue={selectedCuttingMethod}
                 handleChange={handleCuttingMethodChange}
               />
               <Item
-                title="Silkscreen on Stiffener"
+                title={t('silkscreenStiffener')}
                 options={optionsYesNo}
                 selectedValue={selectedSilkscreenStiffener}
                 handleChange={handleSilkscreenStiffenerChange}
@@ -180,26 +187,26 @@ handleMadeSmtChange,
           {addOptVisible && (
             <div>
               <Item
-                title="Inner Copper Weight"
+                title={t('innerCopperWeight')}
                 options={currentOz2}
                 selectedValue={selectedOz2}
                 handleChange={handleOz2Change}
               />
               <Item
-                title="Impedance Control"
+                title={t('impedanceControl')}
                 options={optionsYesNo}
                 selectedValue={selectedControl}
                 handleChange={handleControlChange}
               />
               <Item
-                title="Min via hole size/diameter"
+                title={t('minvia')}
                 options={minVia}
                 selectedValue={selectedMinVia}
                 handleChange={handleMinViaChange}
               />
               {layerStackupVisible && (
                 <Item
-                  title="Layer Stackup"
+                  title={t('layerStackup')}
                   options={layerStackup}
                   selectedValue={selectedLayerStackup}
                   handleChange={handleLayerStackupChange}
@@ -214,13 +221,13 @@ handleMadeSmtChange,
               {viaVisible&&(
                 <div>
                   <Item
-                title="Via Covering"
+                title={t('viaCovering')}
                 options={currentViaCovering}
                 selectedValue={adornBestrow}
                 handleChange={handleViaCoveringChange}
               />
               <Item
-              title="Board Outline Tolerance"
+              title={t('tolerance')}
               options={boardTolerance}
               selectedValue={selectedBoardOutlineTolerance}
               handleChange={handleBoardOutlineToleranceChange}
@@ -230,19 +237,25 @@ handleMadeSmtChange,
               )}           
             
               <Item
-                title="Castellated Holes"
+                title={t('holes')}
                 options={currentCastellatedHoles}
                 selectedValue={selectedCastellatedHoles}
                 handleChange={handleCastellatedHolesChange}
               />
               <Item
-                title="SMT Patch"
+                title={t('SMT')}
                 options={optionsYesNo}
                 selectedValue={madeSmt}
                 handleChange={handleMadeSmtChange}
               />
               <Item
-              title="Edge Plating"
+                title={t('steelMesh')}
+                options={optionsYesNo}
+                selectedValue={steelMesh}
+                handleChange={handleSteelMeshChange}
+              />
+              <Item
+              title={t('edgePlating')}
               options={currentEdgePlating}
               selectedValue={selectedEdgePlating}
               handleChange={handleEdgeChange}
@@ -252,13 +265,13 @@ handleMadeSmtChange,
           {addOptAluminiumVisible&&(
             <div>            
               <Item
-            title="Thermal Conductivity"
+            title={t('conductivity')}
             options={{'1W':'1W'}}
             selectedValue={selectedConductivity}
             handleChange={handleConductivityChange}
           />
           <Item
-            title="Breakdown Voltage"
+            title={t('voltage')}
             options={{'3000V':'3000V'}}
             selectedValue={selectedVoltage}
             handleChange={handleVoltageChange}
@@ -266,7 +279,7 @@ handleMadeSmtChange,
             </div>
           )}
           <Item
-            title="Flying Probe Test"
+            title={t('test')}
             options={currentFlyingProbeTest}
             selectedValue={selectedFlyingProbeTest}
             handleChange={handleFlyingProbeTestChange}
@@ -285,14 +298,14 @@ handleMadeSmtChange,
           handleChange={handleRemoveOrderNumberChange}
         /> */}
           <Item
-            title="Gold Fingers"
+            title={t('goldFingers')}
             options={optionsYesNo}
             selectedValue={selectedGoldFingers}
             handleChange={handleGoldFingersChange}
           />
           {fingerChamferedVisible && (
             <Item
-              title="30°finger chamfered"
+              title={t('fingerChamfered')}
               options={optionsYesNo}
               selectedValue={selectedFingerChamfered}
               handleChange={handleFingerChamferedChange}
@@ -300,22 +313,14 @@ handleMadeSmtChange,
           )}
           {goldFingersThicknessVisible&&(
             <div className='dimen-opt'>
-            <h2>Gold Fingers Thickness</h2>
+            <h2>{t('goldFingersThickness')}</h2>
+            {errorGoldFingersThickness && <div style={{ color: 'red' }}>{errorGoldFingersThickness}</div>}
             <input
               type="text"
               value={inputValuesGoldFingersThickness}
               onChange={handleInputGoldFingersThicknessChange}
             />
             </div>
-          )}
-
-          {edgesVisible && (
-            <Item
-              title="Edges"
-              options={design}
-              selectedValue={selectedEdges}
-              handleChange={handleEdgesChange}
-            />
           )}
 
         </div>
