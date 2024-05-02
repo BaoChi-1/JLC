@@ -1,7 +1,7 @@
 {
   "name": "jlc-project",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "homepage": "https://BaoChi-1.github.io/JLC",
   "dependencies": {
     "@testing-library/jest-dom": "^6.4.2",
