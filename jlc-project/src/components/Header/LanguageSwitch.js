@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+
 function LanguageSwitch({ changeLang }) {
   const [currentLang, setCurrentLang] = useState('en');
   const { t } = useTranslation();
@@ -11,18 +12,14 @@ function LanguageSwitch({ changeLang }) {
     changeLang(newLang);
   };
 
-  const handleCalcClick = () => {
-    console.log('Calculate button clicked!');
-  };
-
   return (
     <div className="language-switch">
       <button className="language-button" onClick={handleClick}>
         {currentLang === 'en' ? 'Русский' : 'English'}
       </button>
-       <button className="language-button" onClick={handleCalcClick}>
+      <Link to="/calculate" className="language-button">
         {t('calc')}
-      </button>
+      </Link>
     </div>
   );
 }
