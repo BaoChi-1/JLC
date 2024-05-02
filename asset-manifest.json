@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/JLC/manifest.json/static/css/main.7e55f93f.css",
-    "main.js": "/JLC/manifest.json/static/js/main.40c174dd.js",
-    "static/js/496.bb62ae48.chunk.js": "/JLC/manifest.json/static/js/496.bb62ae48.chunk.js",
-    "index.html": "/JLC/manifest.json/index.html",
-    "main.7e55f93f.css.map": "/JLC/manifest.json/static/css/main.7e55f93f.css.map",
-    "main.40c174dd.js.map": "/JLC/manifest.json/static/js/main.40c174dd.js.map",
-    "496.bb62ae48.chunk.js.map": "/JLC/manifest.json/static/js/496.bb62ae48.chunk.js.map"
+    "main.css": "/JLC/static/css/main.7e55f93f.css",
+    "main.js": "/JLC/static/js/main.2aeb1b47.js",
+    "static/js/496.bb62ae48.chunk.js": "/JLC/static/js/496.bb62ae48.chunk.js",
+    "index.html": "/JLC/index.html",
+    "main.7e55f93f.css.map": "/JLC/static/css/main.7e55f93f.css.map",
+    "main.2aeb1b47.js.map": "/JLC/static/js/main.2aeb1b47.js.map",
+    "496.bb62ae48.chunk.js.map": "/JLC/static/js/496.bb62ae48.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7e55f93f.css",
-    "static/js/main.40c174dd.js"
+    "static/js/main.2aeb1b47.js"
   ]
 }
