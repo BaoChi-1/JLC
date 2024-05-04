@@ -43,7 +43,7 @@ function ModalForm({
             {Object.entries(baseMaterialImages).map(([key, value], index) => (
               <label key={index} className="custom-radio-label">
                 <img
-                  src={`images_bm/${key}.png`}
+                  src={`${process.env.PUBLIC_URL}/images_bm/${key}.png`}
                   alt={key}
                   className={`custom-radio-image ${plateType === key ? 'selected' : ''}`}
                   onClick={() => handleImageChange({ target: { value: key } })}

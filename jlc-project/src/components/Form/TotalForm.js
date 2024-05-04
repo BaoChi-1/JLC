@@ -7,6 +7,7 @@ import HighOpt from './HighOpt';
 import AdvancesOptions from './AdvancesOptions';
 import Header from '../Header/Header'
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 function TotalForm() {
   const { t } = useTranslation();
@@ -132,7 +133,7 @@ function TotalForm() {
     'Epoxy Filled & Capped': "过孔塞树脂",
     'Copper paste Filled & Capped': '过孔塞铜浆'
   };
-  const boardTolerance = { '±0.2 mm (Regular)': '±0.2 mm (Regular)', '±0.1 mm (Precision)': '±0.1 mm (Precision)' };
+  const boardTolerance = { '±0.2 mm (Regular)': '±0.2 mm (Regular)', '±0.1 mm': '±0.1 mm' };
   const silkscreen = {
     'White': '白',
     'Black': '黑'
@@ -1046,15 +1047,6 @@ function TotalForm() {
     selectedData.goldFingers, stencilCounts, selectedData.selectedSurface, selectedData.selectedProductType,
     selectedData.control, selectedData.selectedMinVia, inputValues.design, selectedData.selectedStiffener
   ])
-  // useEffect(()=>{
-
-  // },[
-  //   selectedData.plateType, selectedData.selectedDesign, selectedData.selectedDelivery, selectedData.halfHole, 
-  //   selectedData.goldFingers, stencilCounts, selectedData.selectedSurface, selectedData.selectedProductType, 
-  //   selectedData.control, selectedData.selectedMinVia, inputValues.design, selectedData.selectedStiffener, selectedData.stencilLayer
-  // ])
-
-
   const handleCastellatedHolesChange = (field, value) => {
     const [halfHole, halfHoleNumber] = castellatedHoles[value];
 
@@ -1134,8 +1126,9 @@ function TotalForm() {
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
+  const [result, setResult] = useState(null);
 
-  const saveJsonToFile = () => {
+  const saveJsonToFile = async() => {
     const {
       produceOrderAccessId,
       addOrderSource,
@@ -1181,6 +1174,13 @@ function TotalForm() {
       madeSteel: optionsYesNo[madeSteel],
       ...inputValues,
     };
+    try {
+const response = await axios.post('http://localhost:5000/calculate-internet-pay', finalData);
+setResult(response.data);
+} catch (error) {
+console.error('Ошибка:', error);
+}
+    
     if (inputValues.stencilNumber !== null) {
       finalData.stencilNumber = parseInt(inputValues.stencilNumber);
     } else {
@@ -1188,13 +1188,13 @@ function TotalForm() {
     }
     const jsonData = JSON.stringify(finalData, null, 2);
     const blob = new Blob([jsonData], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';
-    const clickEvent = new MouseEvent('click');
-    a.dispatchEvent(clickEvent);
-    URL.revokeObjectURL(url);
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = 'data.json';
+    // const clickEvent = new MouseEvent('click');
+    // a.dispatchEvent(clickEvent);
+    // URL.revokeObjectURL(url);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1424,7 +1424,8 @@ function TotalForm() {
           />
         </div>
         <SideForm
-          saveJsonToFile={saveJsonToFile} />
+          saveJsonToFile={saveJsonToFile}
+          result={result} />
       </form>
 
     </div>

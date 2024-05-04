@@ -50,7 +50,7 @@
     "shippingEstimate": "Ожидаемый срок доставки",
     "weight": "Вес заказа",
     "notes": "Примечание к заказу",
-    "addCart": "Добавить в корзину",
+    "addCart": "Выполнить вычисления",
     "No": "Нет",
     "Yes": "Да",
     "1 side": "1 сторона",
@@ -82,13 +82,13 @@
     "LeadFree HASL":"Бессвинцовый HASL",
     "No requirement":"Нет требований",
     "Flex":"Гибкий",
-    "Tented":"Tented",
-    "Untented":"Untented",
+    "Tented":"Закрытый",
+    "Untented":"Незакрытый",
     "Plugged":"Plugged",
     "Epoxy Filled & Capped":"Epoxy Filled & Capped",
     "Copper paste Filled & Capped":"Copper paste Filled & Capped",
-    "±0.2 mm (Regular)":"±0.2 mm (Рекомендуемо)",
-    "±0.1 mm (Precision)":"±0.1 mm (Precision)",
+    "±0.2 mm (Regular)":"±0.2 mm (Стандартный)",
+    "±0.1 mm (Precision)":"±0.1 mm",
     "calc":"Калькулятор"
 
 }

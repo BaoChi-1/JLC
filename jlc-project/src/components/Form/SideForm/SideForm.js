@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import ChargeDetail from './ChargeDetail';
 import { useTranslation } from 'react-i18next';
 function SideForm({
-  saveJsonToFile
+  saveJsonToFile,
+  result
 }) {
   
   // const [chargeDetailVisible,setChargeDetailVisible]=useState(false);
@@ -27,9 +28,11 @@ function SideForm({
         <div className='content'>
         <div className='el-detail'>
         <h2 className='fonts'>{t('price')}</h2>
-        <span></span>
+        <span>{result.internetPayTotalmoney}</span>
+        <p>Converted amount (RUB): {result.convertedAmountRub}</p>
         <h2 className='fonts'>{t('shippingEstimate')}</h2>
         <h2>{t('weight')}</h2>
+        <span>{result.packageMass}</span>
         <span></span>
         </div>
         <button className="sub" type="submit" onClick={saveJsonToFile}>{t('addCart')}</button>
