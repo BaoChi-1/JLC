@@ -14,7 +14,7 @@ function Header() {
        <LanguageSwitch changeLang={changeLang} />
       <div className="flex justify-center min-w-max">
       <div>
-        <img className="h-64 static" src="dostavka.jpg" />
+        <img className="h-64 static" src={`${process.env.PUBLIC_URL}/other_images/dostavka.jpg`} />
       </div>
     </div>
     </div>
