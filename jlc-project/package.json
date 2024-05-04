@@ -2,7 +2,6 @@
   "name": "jlc-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://BaoChi-1.github.io/JLC",
   "dependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^15.0.6",
@@ -23,8 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,7 +43,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "6.1.1",
     "tailwindcss": "^3.4.0"
   }
 }

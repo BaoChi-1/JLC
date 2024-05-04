@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 
 function App() {
   return (
-    <Router basename="/JLC">
+    <Router>
       <div className="App">
         <I18nextProvider i18n={i18n}>
           <Routes>
