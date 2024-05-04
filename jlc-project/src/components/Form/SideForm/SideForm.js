@@ -26,18 +26,18 @@ function SideForm({
         <select></select>
         </div> */}
         <div className='content'>
-        <div className='el-detail'>
-        <h2 className='fonts'>{t('price')}</h2>
-        <span>{result.internetPayTotalmoney}</span>
-        <p>Converted amount (RUB): {result.convertedAmountRub}</p>
-        <h2 className='fonts'>{t('shippingEstimate')}</h2>
-        <h2>{t('weight')}</h2>
-        <span>{result.packageMass}</span>
-        <span></span>
+          <div className='el-detail'>
+            <h2 className='fonts'>{t('price')}</h2>
+            <span>{result && result.internetPayTotalmoney}</span>
+            <p>Converted amount (RUB): {result && result.convertedAmountRub}</p>
+            <h2 className='fonts'>{t('shippingEstimate')}</h2>
+            <h2>{t('weight')}</h2>
+            <span>{result && result.packageMass}</span>
+            <span></span>
+          </div>
+          <button className="sub" type="submit" onClick={saveJsonToFile}>{t('addCart')}</button>
         </div>
-        <button className="sub" type="submit" onClick={saveJsonToFile}>{t('addCart')}</button>
-        </div>
-    </div>
+      </div>
   );
 }
 

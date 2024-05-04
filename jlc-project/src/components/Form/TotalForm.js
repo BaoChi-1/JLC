@@ -1152,6 +1152,7 @@ function TotalForm() {
       madeSteel
     } = selectedData;
     const finalData = {
+      stencilCounts,
       produceOrderAccessId,
       addOrderSource,
       guaranteeService,
@@ -1161,7 +1162,7 @@ function TotalForm() {
       printHDChar,
       stencilLayer: stencilLayer.toString(),
       plateType: baseMaterialImages[plateType],
-      stencilNumber,
+      stencilNumber: parseInt(stencilNumber), // или Number(stencilNumber)
       adornColor: color[adornColor],
       stencilPly: stencilPly.toString(),
       adornBestrow: viaCovering[adornBestrow],
@@ -1174,27 +1175,29 @@ function TotalForm() {
       madeSteel: optionsYesNo[madeSteel],
       ...inputValues,
     };
-    try {
-const response = await axios.post('http://localhost:5000/calculate-internet-pay', finalData);
-setResult(response.data);
-} catch (error) {
-console.error('Ошибка:', error);
-}
+
     
     if (inputValues.stencilNumber !== null) {
       finalData.stencilNumber = parseInt(inputValues.stencilNumber);
     } else {
       finalData.stencilNumber = parseInt(selectedData.stencilNumber);
     }
+    console.log('Отправляемый запрос:', finalData);
+    try {
+    const response = await axios.post('http://localhost:5000/calculate-internet-pay', finalData);
+    setResult(response.data);
+    } catch (error) {
+    console.error('Ошибка:', error);
+    }
     const jsonData = JSON.stringify(finalData, null, 2);
     const blob = new Blob([jsonData], { type: 'application/json' });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = 'data.json';
-    // const clickEvent = new MouseEvent('click');
-    // a.dispatchEvent(clickEvent);
-    // URL.revokeObjectURL(url);
+//     const url = URL.createObjectURL(blob);
+//     const a = document.createElement('a');
+//     a.href = url;
+//     a.download = 'data.json';
+//     const clickEvent = new MouseEvent('click');
+//     a.dispatchEvent(clickEvent);
+//     URL.revokeObjectURL(url);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
