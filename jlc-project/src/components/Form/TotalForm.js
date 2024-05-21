@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import "./Form.css"
 import SideForm from "./SideForm/SideForm";
-import Specifications from './Specifications';
-import HighOpt from './HighOpt';
 import AdvancesOptions from './AdvancesOptions';
 import Header from '../Header/Header'
 import { useTranslation } from 'react-i18next';
@@ -1191,13 +1189,6 @@ function TotalForm() {
     }
     const jsonData = JSON.stringify(finalData, null, 2);
     const blob = new Blob([jsonData], { type: 'application/json' });
-//     const url = URL.createObjectURL(blob);
-//     const a = document.createElement('a');
-//     a.href = url;
-//     a.download = 'data.json';
-//     const clickEvent = new MouseEvent('click');
-//     a.dispatchEvent(clickEvent);
-//     URL.revokeObjectURL(url);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1207,9 +1198,6 @@ function TotalForm() {
     setPcbQtyVisible(false);
   };
 
-  const toggleHighOptVisibility = () => {
-    setHighOptVisible(!highOptVisible);
-  };
   const toggleSpecificationsVisibility = () => {
     setSpecificationsVisible(!specificationsVisible);
   };
@@ -1236,7 +1224,6 @@ function TotalForm() {
           handleNumberChange={(e) => handleOptValuesChange('stencilLayer', e.target.value)}
           stencilLayer={selectedData.stencilLayer}
           stencilCountsOptions={stencilCountsOptions}
-          // productType={productType}
           selectedProductType={selectedData.selectedProductType}
           handleProductTypeChange={(e) => handleOptValuesChange('selectedProductType', e.target.value)}
           pcbQtyVisible={pcbQtyVisible}
@@ -1246,40 +1233,140 @@ function TotalForm() {
           currentNumbers={currentNumbers}
           errorLength={errors.stencilLength}
           errorWidth={errors.stencilWidth}
-
+          currentSurface={currentSurface}
+          selectedSurface={selectedData.selectedSurface}
+          handleSurfaceChange={(e) => handleOptValuesChange('selectedSurface', e.target.value)}
+          currentHours={currentHours}
+          achieveHours={selectedData.achieveHours}
+          handleAchieveHoursChange={(e) => handleOptValuesChange('achieveHours', e.target.value)}
+          madeSmt={selectedData.madeSmt}
+          handleMadeSmtChange={(e) => handleOptValuesChange('madeSmt', e.target.value)}
+          optionsYesNo={optionsYesNo}
+          errorNumber={errors.stencilNumber}
+          selectedDesign={selectedData.stencilNumber}
+          handleDesignChange={(e) => handleOptValuesChange('stencilNumber', e.target.value)}
+          currentDelivery={currentDelivery}
+          handleDeliveryChange={(e) => handleOptValuesChange('selectedDelivery', e.target.value)}
+          selectedDelivery={selectedData.selectedDelivery}
+          handleInputDesignChange={(e) => handleInputValuesChange('stencilNumber', e.target.value)}
+          currentDesign={currentDesign}
+          inputVisible={inputVisible}
+          inputValueDesign={inputValues.design}
+          handleEnterKeyPress={handleEnterKeyPress}
+          stencilPly={selectedData.stencilPly}
+          currentThickness={currentThickness}
+          handleThicknessChange={(e) => handleOptValuesChange('stencilPly', e.target.value)}
 
         />
-        <Specifications
+
+
+        <AdvancesOptions
+        addOptFRVisible={addOptFRVisible}
+        selectedCoverlayThickness={selectedData.selectedCoverlayThickness}
+        currentCoverlayThickness={currentCoverlayThickness}
+        handleCoverlayThicknessChange={(e) => handleOptValuesChange('selectedCoverlayThickness', e.target.value)}
+        layerStackup={layerStackup}
+        handleMinViaChange={(e) => handleOptValuesChange('selectedMinVia', e.target.value)}
+        inputValuesGoldFingersThickness={inputValues.goldFingersThickness}
+        handleInputGoldFingersThicknessChange={(e) => handleInputValuesChange('goldFingersThickness', e.target.value)}
+        selectedMinVia={selectedData.selectedMinVia}
+        currentOz2={currentOz2}
+        minVia={minVia}
+        cuttingMethod={cuttingMethod}
+        handleFR4Change={(e) => handleOptValuesChange('selectedFR4', e.target.value)}
+        selectedFR4={selectedData.selectedFR4}
+        handlePolyimideChange={(e) => handleOptValuesChange('selectedPolyimide', e.target.value)}
+        selectedPolyimide={selectedData.selectedPolyimide}
+        handleStainlessChange={(e) => handleOptValuesChange('selectedstainless', e.target.value)}
+        selectedstainless={selectedData.selectedstainless}
+        handleTapeChange={(e) => handleOptValuesChange('selectedTape', e.target.value)}
+        selectedTape={selectedData.selectedTape}
+        polyimideThicknessVisible={polyimideThicknessVisible}
+        fr4ThicknessVisible={fr4ThicknessVisible}
+        stainlessSteelThicknessVisible={stainlessSteelThicknessVisible}
+        tapeThicknessVisible={tapeThicknessVisible}
+        polyimideThickness={polyimideThickness}
+        fr4Thickness={fr4Thickness}
+        stainlessSteelThickness={stainlessSteelThickness}
+        tapeThickness={tapeThickness}
+        handleCuttingMethodChange={(e) => handleOptValuesChange('selectedCuttingMethod', e.target.value)}
+        selectedCuttingMethod={selectedData.selectedCuttingMethod}
+        handleEmiChange={(e) => handleOptValuesChange('selectedEmi', e.target.value)}
+        selectedEmi={selectedData.selectedEmi}
+        selectedLayerStackup={selectedData.selectedLayerStackup}
+        selectedControl={selectedData.control}
+        selectedOz2={selectedData.selectedOz2}
+        handleLayerStackupChange={(e) => handleOptValuesChange('selectedLayerStackup', e.target.value)}
+        handleControlChange={(e) => handleOptValuesChange('control', e.target.value)}
+        handleOz2Change={(e) => handleOptValuesChange('selectedOz2', e.target.value)}
+        layerStackupVisible={layerStackupVisible}
+        addOptVisible={addOptVisible}
+        addOptFlexVisible={addOptFlexVisible}
+        highOptVisible={highOptVisible}
+        viaVisible={viaVisible}
+        addOptAluminiumVisible={addOptAluminiumVisible}
+        adornBestrow={selectedData.adornBestrow}
+        handleStiffenerChange={(e) => handleOptValuesChange('selectedStiffener', e.target.value)}
+        handleSilkscreenStiffenerChange={(e) => handleOptValuesChange('silkscreenStiffener', e.target.value)}
+        selectedSilkscreenStiffener={selectedData.silkscreenStiffener}
+        selectedBoardOutlineTolerance={selectedData.selectedBoardOutlineTolerance}
+        selectedFlyingProbeTest={selectedData.selectedFlyingProbeTest}
+        selectedStiffener={selectedData.selectedStiffener}
+        selectedGoldFingers={selectedData.goldFingers}
+        selectedCastellatedHoles={castHoles.selectedCastellatedHoles}
+        handleCastellatedHolesChange={(e) => handleCastellatedHolesChange('selectedCastellatedHoles', e.target.value)}
+        selectedEdgePlating={selectedData.edgeGrinding}
+        selectedFingerChamfered={selectedData.fingerChamfered}
+        boardTolerance={boardTolerance}
+        optionsYesNo={optionsYesNo}
+        handleViaCoveringChange={(e) => handleOptValuesChange('adornBestrow', e.target.value)}
+        handleBoardOutlineToleranceChange={(e) => handleOptValuesChange('selectedBoardOutlineTolerance', e.target.value)}
+        handleFlyingProbeTestChange={(e) => handleOptValuesChange('selectedFlyingProbeTest', e.target.value)}
+        handleGoldFingersChange={(e) => handleOptValuesChange('goldFingers', e.target.value)}
+        handleEdgeChange={(e) => handleOptValuesChange('edgeGrinding', e.target.value)}
+        currentEdgePlating={currentEdgePlating}
+        currentViaCovering={currentViaCovering}
+        currentFlyingProbeTest={currentFlyingProbeTest}
+        handleEdgesChange={(e) => handleOptValuesChange('selectedEdges', e.target.value)}
+        selectedEdges={selectedData.selectedEdges}
+        design={design}
+        currentCastellatedHoles={currentCastellatedHoles}
+        fingerChamferedVisible={fingerChamferedVisible}
+        handleFingerChamferedChange={(e) => handleOptValuesChange('fingerChamfered', e.target.value)}
+        stiffener={stiffener}
+        emi={emi}
+        goldFingersThicknessVisible={goldFingersThicknessVisible}
+        selectedConductivity={selectedData.selectedConductivity}
+        selectedVoltage={selectedData.selectedVoltage}
+        handleConductivityChange={(e) => handleOptValuesChange('selectedConductivity', e.target.value)}
+        handleVoltageChange={(e) => handleOptValuesChange('selectedVoltage', e.target.value)}         
+        steelMesh={selectedData.madeSteel}
+        handleSteelMeshChange={(e) => handleOptValuesChange('madeSteel', e.target.value)}
+        errorGoldFingersThickness={errors.goldFingersThickness}
+          toggleAdvancesOptVisibility={toggleAdvancesOptVisibility}
+          currentKelvinTest={currentKelvinTest}
+          selectedKelvinTest={selectedData.kelvinTest}
+          selectedPaper={selectedData.paper}
+          selectedAppearanceQuality={selectedData.selectedAppearanceQuality}
+          handleKelvinTestChange={(e) => handleOptValuesChange('kelvinTest', e.target.value)}
+          handlePaperChange={(e) => handleOptValuesChange('paper', e.target.value)}
+          handleAppearanceQualityChange={(e) => handleOptValuesChange('selectedAppearanceQuality', e.target.value)}
+          advancesOptVisible={advancesOptVisible}
+          currentAppearanceQuality={currentAppearanceQuality}
           specificationsVisible={specificationsVisible}
           toggleSpecificationsVisibility={toggleSpecificationsVisibility}
-          selectedDesign={selectedData.stencilNumber}
           selectedMaterialType={selectedData.tgBoardLevel}
           currentMaterialType={currentMaterialType}
           handleMaterialTypeChange={(e) => handleOptValuesChange('tgBoardLevel', e.target.value)}
-          handleDesignChange={(e) => handleOptValuesChange('stencilNumber', e.target.value)}
-          currentSurface={currentSurface}
-          handleEnterKeyPress={handleEnterKeyPress}
           inputValuesColumn={inputValues.column}
           inputValuesRow={inputValues.row}
-          handleInputDesignChange={(e) => handleInputValuesChange('stencilNumber', e.target.value)}
           handleInputColumnChange={(e) => handleInputValuesChange('column', e.target.value)}
           handleInputRowChange={(e) => handleInputValuesChange('row', e.target.value)}
-          inputValueDesign={inputValues.design}
-          selectedDelivery={selectedData.selectedDelivery}
-          stencilPly={selectedData.stencilPly}
-          handleDeliveryChange={(e) => handleOptValuesChange('selectedDelivery', e.target.value)}
           currentColor={currentColor}
           handleColorChange={(e) => handleOptValuesChange('adornColor', e.target.value)}
-          handleSurfaceChange={(e) => handleOptValuesChange('selectedSurface', e.target.value)}
-          selectedSurface={selectedData.selectedSurface}
           adornColor={selectedData.adornColor}
-          handleThicknessChange={(e) => handleOptValuesChange('stencilPly', e.target.value)}
           handleSilkscreenChange={(e) => handleOptValuesChange('selectedSilkscreen', e.target.value)}
           selectedSilkscreen={selectedData.selectedSilkscreen}
-          currentThickness={currentThickness}
-          currentDelivery={currentDelivery}
-          currentDesign={currentDesign}
-          inputVisible={inputVisible}
           panelFormat={panelFormat}
           edgeRails={edgeRails}
           handleEdgesRailsChange={(e) => handleOptValuesChange('selectedEdgeRail', e.target.value)}
@@ -1295,127 +1382,8 @@ function TotalForm() {
           selectedCooperType={selectedData.selectedCooperType}
           currentCooperType={currentCooperType}
           handleCooperTypeChange={(e) => handleOptValuesChange('selectedCooperType', e.target.value)}
-          errorNumber={errors.stencilNumber}
           errorRow={errors.row}
           errorColumn={errors.column}
-
-        />
-        <HighOpt
-          addOptFRVisible={addOptFRVisible}
-          selectedCoverlayThickness={selectedData.selectedCoverlayThickness}
-          currentCoverlayThickness={currentCoverlayThickness}
-          handleCoverlayThicknessChange={(e) => handleOptValuesChange('selectedCoverlayThickness', e.target.value)}
-          layerStackup={layerStackup}
-          handleMinViaChange={(e) => handleOptValuesChange('selectedMinVia', e.target.value)}
-          inputValuesGoldFingersThickness={inputValues.goldFingersThickness}
-          handleInputGoldFingersThicknessChange={(e) => handleInputValuesChange('goldFingersThickness', e.target.value)}
-          selectedMinVia={selectedData.selectedMinVia}
-          currentOz2={currentOz2}
-          minVia={minVia}
-          cuttingMethod={cuttingMethod}
-          handleFR4Change={(e) => handleOptValuesChange('selectedFR4', e.target.value)}
-          selectedFR4={selectedData.selectedFR4}
-          handlePolyimideChange={(e) => handleOptValuesChange('selectedPolyimide', e.target.value)}
-          selectedPolyimide={selectedData.selectedPolyimide}
-          handleStainlessChange={(e) => handleOptValuesChange('selectedstainless', e.target.value)}
-          selectedstainless={selectedData.selectedstainless}
-          handleTapeChange={(e) => handleOptValuesChange('selectedTape', e.target.value)}
-          selectedTape={selectedData.selectedTape}
-          polyimideThicknessVisible={polyimideThicknessVisible}
-          fr4ThicknessVisible={fr4ThicknessVisible}
-          stainlessSteelThicknessVisible={stainlessSteelThicknessVisible}
-          tapeThicknessVisible={tapeThicknessVisible}
-          polyimideThickness={polyimideThickness}
-          fr4Thickness={fr4Thickness}
-          stainlessSteelThickness={stainlessSteelThickness}
-          tapeThickness={tapeThickness}
-          handleCuttingMethodChange={(e) => handleOptValuesChange('selectedCuttingMethod', e.target.value)}
-          selectedCuttingMethod={selectedData.selectedCuttingMethod}
-          handleEmiChange={(e) => handleOptValuesChange('selectedEmi', e.target.value)}
-          selectedEmi={selectedData.selectedEmi}
-          selectedLayerStackup={selectedData.selectedLayerStackup}
-          selectedControl={selectedData.control}
-          selectedOz2={selectedData.selectedOz2}
-          handleLayerStackupChange={(e) => handleOptValuesChange('selectedLayerStackup', e.target.value)}
-          handleControlChange={(e) => handleOptValuesChange('control', e.target.value)}
-          handleOz2Change={(e) => handleOptValuesChange('selectedOz2', e.target.value)}
-          layerStackupVisible={layerStackupVisible}
-          addOptVisible={addOptVisible}
-          addOptFlexVisible={addOptFlexVisible}
-          highOptVisible={highOptVisible}
-          viaVisible={viaVisible}
-          addOptAluminiumVisible={addOptAluminiumVisible}
-          // currentColorOz={currentColorOz}
-          toggleHighOptVisibility={toggleHighOptVisibility}
-          adornBestrow={selectedData.adornBestrow}
-          handleStiffenerChange={(e) => handleOptValuesChange('selectedStiffener', e.target.value)}
-          handleSilkscreenStiffenerChange={(e) => handleOptValuesChange('silkscreenStiffener', e.target.value)}
-          selectedSilkscreenStiffener={selectedData.silkscreenStiffener}
-          selectedBoardOutlineTolerance={selectedData.selectedBoardOutlineTolerance}
-          selectedFlyingProbeTest={selectedData.selectedFlyingProbeTest}
-          // selectedConfirmFile={selectedData.confirmFile}
-          selectedStiffener={selectedData.selectedStiffener}
-          // selectedRemoveOrderNumber={selectedData.removeOrderNumber}
-          selectedGoldFingers={selectedData.goldFingers}
-          selectedCastellatedHoles={castHoles.selectedCastellatedHoles}
-          handleCastellatedHolesChange={(e) => handleCastellatedHolesChange('selectedCastellatedHoles', e.target.value)}
-          // halfHoleNumber={selectedData.halfHoleNumber}
-          selectedEdgePlating={selectedData.edgeGrinding}
-          selectedFingerChamfered={selectedData.fingerChamfered}
-          boardTolerance={boardTolerance}
-          optionsYesNo={optionsYesNo}
-          // removeOrderNumber={removeOrderNumber}
-          handleViaCoveringChange={(e) => handleOptValuesChange('adornBestrow', e.target.value)}
-          handleBoardOutlineToleranceChange={(e) => handleOptValuesChange('selectedBoardOutlineTolerance', e.target.value)}
-          handleFlyingProbeTestChange={(e) => handleOptValuesChange('selectedFlyingProbeTest', e.target.value)}
-          // handleConfirmFileChange={handleConfirmFileChange}
-          // handleRemoveOrderNumberChange={handleRemoveOrderNumberChange}
-          handleGoldFingersChange={(e) => handleOptValuesChange('goldFingers', e.target.value)}
-          handleEdgeChange={(e) => handleOptValuesChange('edgeGrinding', e.target.value)}
-          currentEdgePlating={currentEdgePlating}
-          currentViaCovering={currentViaCovering}
-          currentFlyingProbeTest={currentFlyingProbeTest}
-          // edgesVisible={edgesVisible}
-          handleEdgesChange={(e) => handleOptValuesChange('selectedEdges', e.target.value)}
-          selectedEdges={selectedData.selectedEdges}
-          design={design}
-          currentCastellatedHoles={currentCastellatedHoles}
-          fingerChamferedVisible={fingerChamferedVisible}
-          handleFingerChamferedChange={(e) => handleOptValuesChange('fingerChamfered', e.target.value)}
-          stiffener={stiffener}
-          emi={emi}
-          goldFingersThicknessVisible={goldFingersThicknessVisible}
-          selectedConductivity={selectedData.selectedConductivity}
-          selectedVoltage={selectedData.selectedVoltage}
-          handleConductivityChange={(e) => handleOptValuesChange('selectedConductivity', e.target.value)}
-          handleVoltageChange={(e) => handleOptValuesChange('selectedVoltage', e.target.value)}
-          madeSmt={selectedData.madeSmt}
-          handleMadeSmtChange={(e) => handleOptValuesChange('madeSmt', e.target.value)}
-          steelMesh={selectedData.madeSteel}
-          handleSteelMeshChange={(e) => handleOptValuesChange('madeSteel', e.target.value)}
-          errorGoldFingersThickness={errors.goldFingersThickness}
-        />
-        <AdvancesOptions
-          toggleAdvancesOptVisibility={toggleAdvancesOptVisibility}
-          currentKelvinTest={currentKelvinTest}
-          optionsYesNo={optionsYesNo}
-          // selectedPackage={selectedData.selectedPackage}
-          // selectedSilkscreenTechnology={selectedData.selectedSilkscreenTechnology}
-          selectedKelvinTest={selectedData.kelvinTest}
-          selectedPaper={selectedData.paper}
-          selectedAppearanceQuality={selectedData.selectedAppearanceQuality}
-          handleKelvinTestChange={(e) => handleOptValuesChange('kelvinTest', e.target.value)}
-          handlePaperChange={(e) => handleOptValuesChange('paper', e.target.value)}
-          handleAppearanceQualityChange={(e) => handleOptValuesChange('selectedAppearanceQuality', e.target.value)}
-          // handleSilkscreenTechnologyChange={handleSilkscreenTechnologyChange}
-          // handlePackageChange={handlePackageChange}
-          advancesOptVisible={advancesOptVisible}
-          currentAppearanceQuality={currentAppearanceQuality}
-          achieveHours={selectedData.achieveHours}
-          handleAchieveHoursChange={(e) => handleOptValuesChange('achieveHours', e.target.value)}
-          currentHours={currentHours}
-        // currentSilkscreenTechnology={currentSilkscreenTechnology}
-        // packageBox={packageBox}
         />
         <div>
           <h2>{t('notes')}</h2>

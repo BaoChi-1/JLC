@@ -1,0 +1,97 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .input-wrapper {
+    /* margin-bottom: 15px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .input-wrapper label {
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .input-wrapper input {
+    width: 100px;
+    padding: 5px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+
+  }
+  
+  .button-wrapper {
+    margin-top: 20px;
+  }
+  
+  .button-wrapper button {
+    padding: 10px 20px;
+    background-color: #f8a942;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button-wrapper button:hover {
+    background-color: #e0884d;
+  }
+  
+  .result {
+    margin-top: 20px;
+  }
+  
+  .result h2 {
+    margin-bottom: 10px;
+  }
+  
+  .result p {
+    margin-bottom: 5px;
+  }
+.result-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.result-row p {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.result-row p:last-child {
+    margin-right: 0;
+}
+
+
+.input-wrapper-time {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper-time label {
+  margin-right: 10px;
+}
+
+.input-wrapper-time input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.input-wrapper-time input[type="text"] {
+  width: 100%;
+}
